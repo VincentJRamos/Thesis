@@ -5,13 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <meta charset="utf-8">
 		<title>Raizen Travel and Tours</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	<link href="css/animate.min.css" rel="stylesheet" >	
-	<link href="css/font-awesome.min.css" rel="stylesheet">	
-	<link href="css/prettyPhoto.css" rel="stylesheet">
-	
-	  <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/bootstrap-theme.min.css" rel="stylesheet">
 	<link href="css/animate.min.css" rel="stylesheet" >	
 	<link href="css/font-awesome.min.css" rel="stylesheet">	
@@ -62,6 +56,25 @@
 							<li><a href="#rules">Rules and Regulation</a></li>
                             <li><a href="#contactus">Contact Us</a></li>	
 							<li><a href = "book.php">Book Your Tour</a></li>
+							
+							<li>
+								<?php
+									session_start();
+
+									if (!isset($_SESSION['username'])) {
+										echo '<a href = "client/login.php">Login / Register</a>';
+									}else{
+										echo '<li class="nav-item dropdown">
+										        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.
+										          $_SESSION['username'].
+										        '</a>
+										        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+										          <a class="dropdown-item" href="client/logout.php">Logout</a>
+										        </div>
+										      </li>';
+									}
+								?>
+							</li>
 														
 						</ul>
 					</div>		

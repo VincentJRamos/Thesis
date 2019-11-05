@@ -1,3 +1,9 @@
+<?php
+	session_start();
+	$_SESSION['oldUrl'] = $_SERVER['REQUEST_URI'];
+	require_once('check_login.php');
+?>
+
 <!DOCTYPE html>
 <html lang = "en">
 	<head>
@@ -39,26 +45,6 @@
 				<br style = "clear:both;" />
 				<div class = "well col-md-4" style = "color:#000000;">
 					<form method = "POST" enctype = "multipart/form-data">
-						<div class = "form-group">
-							<label>First Name</label>
-							<input type = "text" class = "form-control" name = "firstname" required = "required" />
-						</div>
-						<div class = "form-group">
-							<label>Last Name</label>
-							<input type = "text" class = "form-control" name = "lastname" required = "required" />
-						</div>
-						<div class = "form-group">
-							<label>Middle Name</label>
-							<input type = "text" class = "form-control" name = "middlename" required = "required" />
-						</div>
-						<div class = "form-group">
-							<label>Complete Address</label>
-							<input type = "text" class = "form-control" name = "address" required = "required" />
-						</div>
-						<div class = "form-group">
-							<label>Contact No.</label>
-							<input type = "number" class = "form-control" name = "contactno" required = "required" />
-						</div>
 						<div class = "form-group">
 							<label>Book Date</label>
 							<input type = "date" class = "form-control" name = "date" required = "required" />

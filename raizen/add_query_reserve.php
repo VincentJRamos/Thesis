@@ -1,14 +1,17 @@
 <?php
+
 	require_once 'admin/connect.php';
 	if(ISSET($_POST['add_guest'])){
-		$firstname = $_POST['firstname'];
-		$middlename = $_POST['middlename'];
-		$lastname = $_POST['lastname'];
-		$address = $_POST['address'];
-		$contactno = $_POST['contactno'];
+		// $firstname = $_POST['firstname'];
+		// $middlename = $_POST['middlename'];
+		// $lastname = $_POST['lastname'];
+		// $address = $_POST['address'];
+		// $contactno = $_POST['contactno'];
 		$checkin = $_POST['date'];
-		$conn->query("INSERT INTO `guest` (firstname, middlename, lastname, address, contactno) VALUES('$firstname', '$middlename', '$lastname', '$address', '$contactno')") or die(mysqli_error());
-		$query = $conn->query("SELECT * FROM `guest` WHERE `firstname` = '$firstname' && `lastname` = '$lastname' && `contactno` = '$contactno'") or die(mysqli_error());
+		// $conn->query("INSERT INTO `guest` (firstname, middlename, lastname, address, contactno) VALUES('$firstname', '$middlename', '$lastname', '$address', '$contactno')") or die(mysqli_error());
+		$guestId = $_SESSION['guestId'];
+
+		$query = $conn->query("SELECT * FROM `guest` WHERE guest_id = '$guestId'") or die(mysqli_error());
 		$fetch = $query->fetch_array();
 		$query2 = $conn->query("SELECT * FROM `transaction` WHERE `checkin` = '$checkin' && `tour_id` = '$_REQUEST[tour_id]' && `status` = 'Pending'") or die(mysqli_error());
 		$row = $query2->num_rows;
