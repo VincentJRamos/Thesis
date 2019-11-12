@@ -11,18 +11,20 @@ if (isset($_POST['register'])) {
 	$lastname = $_POST['lastname'];
 	$address = $_POST['address'];
 	$contact = $_POST['contact'];
+	$email = $_POST['email'];
 
 	$client = new Client();
-	$register_success = $client->register($username, $password, $firstname, $middlename, $lastname, $address, $contact);
+	$data = $client->register($username, $password, $firstname, $middlename, $lastname, $address, $contact, $email);
 
-	if ($register_success == True) {
-		if (isset($_SESSION['oldUrl'])) {
-			header("location:". $_SESSION['oldUrl']);
-		}else{
-			header('location:../index.php');
-		}
-	}else {
-		$error_message = 'Username already exist';
+	if ($data) {
+		header('location: activate_account.php');
+		// if (isset($_SESSION['oldUrl'])) {
+		// 	header("location:". $_SESSION['oldUrl']);
+		// }else{
+		// 	header('location:../index.php');
+		// }
+	} else {
+		$error_message = 'Username already exist, Please choose another one.';
 	}
 
 }
@@ -82,13 +84,17 @@ if (isset($_POST['register'])) {
 			  </div>
 			  
 			  <div class="form-row">
-			    <div class="form-group col-md-6">
+			    <div class="form-group col-md-4">
 			      <label for="Address">Address</label>
 			      <input type="text" class="form-control" name="address" id="Address" required>
 			    </div>
-			    <div class="form-group col-md-6">
+			    <div class="form-group col-md-4">
 			      <label for="Contact">Contact No.</label>
 			      <input type="text" class="form-control" name="contact" id="Contact" required>
+			    </div>
+			    <div class="form-group col-md-4">
+			      <label for="Email">Email</label>
+			      <input type="email" class="form-control" name="email" id="Email" required>
 			    </div>
 			  </div>
 			  <div class="form-row">
