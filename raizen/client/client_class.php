@@ -27,19 +27,19 @@ class Client {
 
 		// check if account is activated first
 		// if account is not activated redirect to activate_account page
-		if ($is_activated == 0) {
-			
+		if ($is_activated == 0 && $row > 0) 
+		{
 			$activation_code = $this->user_get_activation_code($data['guest_id']);
 			// send email to the guest
 			$this->send_activation_code($data['email'], $activation_code);
 
 			header('location:activate_account.php');
-		} else {
-			if ($row != 0) {
-				
-				$data = $exec->fetch_array();
-				return True;
-			}
+		} 
+		else if ($row != 0) 
+		{
+			session_start();
+			$_SESSION['is_logged_in'] = True;
+			return True;
 		}
 		return False;
 	}
@@ -69,6 +69,7 @@ class Client {
 	public function register($username, $password, $firstname, $middlename, $lastname, $address, $contactno, $email) {
 		// mas okay my cleaning ng data dto
 		$exist_username = False;
+		
 		$query = "SELECT * FROM guest WHERE username = '$username'";
 		$exec = $this->conn->query($query);
 		if ($exec) {
@@ -78,14 +79,30 @@ class Client {
 			}
 		}
 
+		$exist_email = False;
+
+		$query = "SELECT * FROM guest WHERE email = '$email'";
+		$exec = $this->conn->query($query);
+		if ($exec) {
+			$row = $exec->num_rows;
+			if ($row != 0) {
+				$exist_email = True;
+			}
+		}
+
 		// generate activation code
 		$activation_code = mt_rand(100000, 999999);
 
-		$mysql = "INSERT INTO guest(username, password, firstname, middlename, lastname, address, contactno, email)
-				  VALUES('$username', '$password', '$firstname', '$middlename', '$lastname', '$address', '$contactno', '$email')";
+		
 
-		if ($this->conn->query($mysql) === True && $exist_username == False) {
+		if ($exist_username == False && $exist_email == False) {
+
+			$mysql = "INSERT INTO guest(username, password, firstname, middlename, lastname, address, contactno, email)
+				  VALUES('$username', '$password', '$firstname', '$middlename', '$lastname', '$address', '$contactno', '$email')";
+			$this->conn->query($mysql);
 			$last_id = $this->conn->insert_id;
+
+			// select query to get the data of the guest who registered
 			$query = "SELECT * FROM guest WHERE guest_id = '$last_id'";
 			$exec = $this->conn->query($query);
 			$data = $exec->fetch_array();
@@ -105,7 +122,12 @@ class Client {
 
 			return $data;
 		}
-		return False;
+		else if ($exist_username == True) {
+			return 'exist_username';
+		}
+		else if ($exist_email == True) {
+			return 'exist_email';
+		}
 	}
 
 	// function that checks the account if activated or not
@@ -133,9 +155,19 @@ class Client {
 		$mysql = "UPDATE guest SET is_activated = 1 WHERE guest_id = '$guest_id$'";
 		$exec = $this->conn->query($mysql);
 
-		if ($exec && $data['id']) {
+		session_start();
+		
+		if ($exec && isset($_SESSION['oldUrl']))
+		{
+			header("location:". $_SESSION['oldUrl']);
+		}
+		if ($exec && $data['id']) 
+		{
+			$_SESSION['is_logged_in'] = True;
 			header('location: ../index.php');
-		} else {
+		} 
+		else 
+		{
 			return False;
 		}
 	}

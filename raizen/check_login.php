@@ -1,9 +1,7 @@
 <?php
 
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['is_logged_in'])) {
 	header('location:client/login.php');
-} else {
-	header('location:../index.php');
 }
 
 ?>

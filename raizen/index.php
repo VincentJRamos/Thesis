@@ -61,7 +61,7 @@
 								<?php
 									session_start();
 
-									if (!isset($_SESSION['username'])) {
+									if (!isset($_SESSION['is_logged_in'])) {
 										echo '<a href = "client/login.php">Login / Register</a>';
 									}else{
 										echo '<li class="nav-item dropdown">
