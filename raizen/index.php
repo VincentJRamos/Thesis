@@ -37,7 +37,7 @@
 			<div class="container">
 				<div class="row">
                    <div style = "float:right; margin-left: -10px;" >
-		<img src = "images/raizen.jpg" width = "90" height = "80">				
+		<img src = "photo/-00000.png" width = "90" height = "80">				
 					<div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="icon-bar"></span>
@@ -53,7 +53,6 @@
 							<li><a href="#home">Home</a></li>
 							<li><a href="#about">About</a></li>
 							<li><a href="#gallery">Gallery</a></li>
-							<li><a href="#rules">Rules and Regulation</a></li>
                             <li><a href="#contactus">Contact Us</a></li>	
 							<li><a href = "book.php">Book Your Tour</a></li>
 							
@@ -61,7 +60,7 @@
 								<?php
 									session_start();
 
-									if (!isset($_SESSION['is_logged_in'])) {
+									if (!isset($_SESSION['username'])) {
 										echo '<a href = "client/login.php">Login / Register</a>';
 									}else{
 										echo '<li class="nav-item dropdown">
@@ -69,7 +68,6 @@
 										          $_SESSION['username'].
 										        '</a>
 										        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-										          <a class="dropdown-item" href="client/book_history.php">Book History</a>
 										          <a class="dropdown-item" href="client/logout.php">Logout</a>
 										        </div>
 										      </li>';
@@ -94,21 +92,20 @@
 				<div class="item active"> <!-- Change Image -->
 					<div class="caption">
 						<h1 class="animated fadeInLeftBig">Welcome to <strong>RAIZEN</strong></h1>
-						
-						
+						<a data-scroll class="learn-more animated fadeInUpBig" href="#about">Start now</a>
 					</div>
 				</div>
 				<div class="item"> <!-- Change Image -->
 					<div class="caption">
 						<h1 class="animated fadeInLeftBig"><strong>Travel</strong> and Tours</h1>
-						
+						<a data-scroll class="learn-more animated fadeInUpBig" href="#about">Start now</a>
 						
 					</div>
 				</div>
 				<div class="item"> <!-- Change Image -->
 					<div class="caption">
 						<h1 class="animated fadeInLeftBig">Enjoy <strong>Traveling</strong></h1>
-						
+						<a data-scroll class="learn-more animated fadeInUpBig" href="#about">Start now</a>
 					</div>
 				</div>
 			</div>
@@ -132,11 +129,11 @@
 					</div>
 				<div class="element-title wow fadeInDown" data-wow-duration="1s" data-wow-delay="300ms">			
 					
-                    	<div class="wrapper-why-us"><h1 style="color:gray"><strong> Mission</strong></h1>
+                    	<div class="wrapper-why-us"><h2> Mission</h2>
                     <h3 class="main-color">Our agency Raizen Travel and Tours supports the advocacy of our government in promoting the beautiful tourists spots destinations of our country. We try to do our best we can to ensure that every trip or visit of our clients will not only bring them fun, luxury, joy and pleasure but also to make sure to them that they will always remember our country, especially the foreigners as their second home. That every time they remember our country where ever they may be, they will think to come back and visit again to experience once more their one of the most memorable and unforgettable moment in their lives. Raizen travel and tours always do our best to promote and provide right information about the history and trivia of every tourist spot destination so that they will learn and have enough knowledge of our heritage.<br> Our company will continue to provide good quality service, being hospitable and bring friendship between our employees and our clients, both local and foreigners. Raizen travel and tours will be and always have the pleasure of giving service and promting our country as one of the most beautiful tourist spot destination in the world.</h3>
 					</div>
-                    <div class="wrapper-why-us"><h1 style="color:gray"><strong> Vision</strong></h1>
-                    <h3 class="main-color">Our agency Raizen Travel and Tours supports the advocacy of our government in promoting the beautiful tourists spots destinations of our country. We try to do our best we can to ensure that every trip or visit of our clients will not only bring them fun, luxury, joy and pleasure but also to make sure to them that they will always remember our country, especially the foreigners as their second home. That every time they remember our country where ever they may be, they will think to come back and visit again to experience once more their one of the most memorable and unforgettable moment in their lives. Raizen travel and tours always do our best to promote and provide right information about the history and trivia of every tourist spot destination so that they will learn and have enough knowledge of our heritage.<br> Our company will continue to provide good quality service, being hospitable and bring friendship between our employees and our clients, both local and foreigners. Raizen travel and tours will be and always have the pleasure of giving service and promting our country as one of the most beautiful tourist spot destination in the world.</h3>
+                    <div class="wrapper-why-us"><h2> Vision</h2>
+                    <h3 class="main-color">To be able to provide good quality and affordable service to our clients. To ensure the safety and taking care of our clients in every trips. To provide right information about the history and give trivia to our clients in every each tourist destinations. To be able to form a new friendship and good companion between our employees and our clients.<br>To make sure that our clients will enjoy, have fun and bring pleasure every time our clients visit our tourist spot destinations. To be transparent as we can to our clients. To always understand the needs and wants of our clients. To provide our clients the outmost comfortable travel. To be able to give our clients the excitements and the most unforgettable and memorable experience of their lives. To provide our clients the trust that they are in good hands with our company.</h3>
 					</div>
 			</div>
             </div>
@@ -144,7 +141,6 @@
         </div>
         </div>
     </section>
-    
  
 <!-- Gallery  -->
   <section class="section-wrapper" id="gallery">
@@ -317,28 +313,7 @@
     
     <!-- Rules -->
     
-    <section class="section-wrapper" id="rules">
-    <div class="stay-in parallax">
-		<!-- Block Title -->
-		<div class="overlay">
-			<div class="wrapper-block-stay-in">
-				<div class="element-title">	
-					<div class="row">	 		
-						<div class="container">	 		
-							<h1 class="white-color wow fadeInDown" data-wow-duration="1s" data-wow-delay="300ms"><strong>Rules and Regulations</strong></h1>
-							
-                            
-                            <h3 style="color:#000000"><center><span style="background-color:gold">Our agency Raizen Travel and Tours supports the advocacy of our government in promoting the beautiful tourists spots destinations of our country. We try to do our best we can to ensure that every trip or visit of our clients will not only bring them fun, luxury, joy and pleasure but also to make sure to them that they will always remember our country, especially the foreigners as their second home. That every time they remember our country where ever they may be, they will think to come back and visit again to experience once more their one of the most memorable and unforgettable moment in their lives. Raizen travel and tours always do our best to promote and provide right information about the history and trivia of every tourist spot destination so that they will learn and have enough knowledge of our heritage.<br> Our company will continue to provide good quality service, being hospitable and bring friendship between our employees and our clients, both local and foreigners. Raizen travel and tours will be and always have the pleasure of giving service and promting our country as one of the most beautiful tourist spot destination in the world.</span></center></h3>
-					</div>
-						</div>
-					</div>
-				</div>
-            </div>
-        </div>
-    
-     
-</section> 
-    
+         
     <!-- Contacts -->
     <section class="section-wrapper" id="contactus">
 	
@@ -413,22 +388,17 @@
     </section>
     
     
-     <section class="section-wrapper" id="reservation.php">
-	
-
-	
-		<!-- Block Title -->	
-		<div class="element-title">			
-			<div class="row">	 		
-				<div class="container">
-					<div class="section-title wow fadeInDown" data-wow-duration="1s" data-wow-delay="300ms">			
-						<h1 style="background-color:#ae8a46"><a href="reservation.php"><strong>Make A Reservation</strong></a></h1>							
-					</div>	
-                </div>
-            </div>
-        </div>
-        
-    </section>
+     <div class="bottom-footer">
+	<div class="container"> 
+		<div class="bottom-footer-center wow fadeInDown" data-wow-duration="1s" data-wow-delay="300ms">
+			<ul class="bottom-social-icons">
+				<li><a href="www.facebook.com/raizen"><i class="fa fa-facebook"></i></a></li>
+				<li><a href="www.twitter.com/raizen"><i class="fa fa-twitter"></i></a></li>
+				<li><a href="www.instagram.com/raizen"><i class="fa fa-instagram"></i></a></li>
+			</ul>
+		</div>
+     </div>
+    </div>
     
     
 <?php include ("footer.php"); ?>
