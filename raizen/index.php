@@ -69,6 +69,7 @@
 										          $_SESSION['username'].
 										        '</a>
 										        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+										          <a class="dropdown-item" href="client/book_history.php">Book History</a>
 										          <a class="dropdown-item" href="client/logout.php">Logout</a>
 										        </div>
 										      </li>';

@@ -181,6 +181,29 @@ class Client {
 
 	}
 
+	public function get_book_list($guest_id) {
+
+		$query = "SELECT * FROM transaction as trans
+				  INNER JOIN tour as tr
+				  ON trans.tour_id = tr.tour_id
+				  WHERE trans.guest_id = '$guest_id'";
+		$exec = $this->conn->query($query);
+
+		return $exec;
+	}
+
+	public function get_transaction_details($transaction_id) {
+
+		$query = "SELECT * FROM transaction as trans
+				  INNER JOIN tour as tr
+				  ON trans.tour_id = tr.tour_id
+				  WHERE trans.transaction_id = '$transaction_id'";
+		$exec = $this->conn->query($query);
+		$data = $exec->fetch_array();
+
+		return $data;
+	}
+
 }
 
 

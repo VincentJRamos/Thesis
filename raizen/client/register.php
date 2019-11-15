@@ -65,7 +65,7 @@ if (isset($_POST['register'])) {
 			  <div class="form-row">
 			    <div class="form-group col-md-6">
 			      <label for="Username">Username</label>
-			      <input type="text" class="form-control" name="username" id="Username" placeholder="Email" required>
+			      <input type="text" class="form-control" name="username" id="Username" placeholder="Username" required>
 			    </div>
 			    <div class="form-group col-md-6">
 			      <label for="Password">Password</label>
