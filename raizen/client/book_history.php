@@ -36,12 +36,14 @@ $book_list = $client->get_book_list($guest_id);
 		<table id="book_history_table" class="table">
 			<thead>
 				<tr>
+					<th>Transaction #</th>
 					<th>Tour type</th>
 					<th>Days</th>
-					<th>Status</th>
 					<th>Price</th>
 					<th>Total Downpayment</th>
+					<th>Status</th>
 					<th>Action</th>
+
 				</tr>
 			</thead>
 			<tbody>
@@ -50,11 +52,12 @@ $book_list = $client->get_book_list($guest_id);
 					while($row = mysqli_fetch_assoc($book_list))
 					{
 						echo "<tr>";
+						echo "<td>".$row['transaction_id']."</td>";
 						echo "<td>".$row['tour_type']."</td>";
 						echo "<td>".$row['days']."</td>";
-						echo "<td>".$row['status']."</td>";
 						echo "<td>".$row['price']."</td>";
-						echo "<td>500</td>";
+						echo "<td>".$row['payment']."</td>";
+						echo "<td>".$row['status']."</td>";
 						echo '<td>
 								<button type="button" class="btn btn-primary get_book_details" data-toggle="modal" data-target="#book_detail_modal" data-id="'.$row['transaction_id'].'">
 									More detais

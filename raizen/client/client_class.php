@@ -221,12 +221,16 @@ class Client {
 			// get the half price of total price
 			$half_price = $row['price'] / 2;
 
+			#echo $half_price.'<br/>';
+
 			// checks if the downpayment is less than half the price
 			if ($row['payment'] < $half_price) {
+				#echo 'True';
 				$book_counter += 1;
 			}
-
 		}
+
+		#echo $book_counter;
 
 		if ($book_counter >= 3)
 		{
@@ -234,7 +238,7 @@ class Client {
 		}
 		else
 		{
-			return True
+			return True;
 		}
 		
 	}
