@@ -60,7 +60,7 @@
 								<?php
 									session_start();
 
-									if (!isset($_SESSION['username'])) {
+									if (!isset($_SESSION['is_logged_in'])) {
 										echo '<a href = "client/login.php">Login / Register</a>';
 									}else{
 										echo '<li class="nav-item dropdown">
@@ -68,6 +68,7 @@
 										          $_SESSION['username'].
 										        '</a>
 										        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+										          <a class="dropdown-item" href="client/book_history.php">Book History</a>
 										          <a class="dropdown-item" href="client/logout.php">Logout</a>
 										        </div>
 										      </li>';

@@ -204,6 +204,41 @@ class Client {
 		return $data;
 	}
 
+	public function check_if_can_book($guest_id) {
+
+		// select the tour price and payment of each row
+		$query = "SELECT trans.transaction_id, tour.price, trans.payment FROM transaction as trans
+				  INNER JOIN tour
+				  ON trans.tour_id = tour.tour_id
+				  WHERE guest_id = '$guest_id'";
+		$exec = $this->conn->query($query);
+		
+		// this increments if his bookings payment is not greater than half of the total price
+		$book_counter = 0;
+
+		while($row = mysqli_fetch_assoc($exec))
+		{
+			// get the half price of total price
+			$half_price = $row['price'] / 2;
+
+			// checks if the downpayment is less than half the price
+			if ($row['payment'] < $half_price) {
+				$book_counter += 1;
+			}
+
+		}
+
+		if ($book_counter >= 3)
+		{
+			return False;
+		}
+		else
+		{
+			return True
+		}
+		
+	}
+
 }
 
 
