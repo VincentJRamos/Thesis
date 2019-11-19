@@ -4,13 +4,18 @@
 	require_once 'client/client_class.php';
 
 	if(ISSET($_POST['add_guest'])){
+
+		// remove existing post details dahil meron n tayo user accounts
+
 		// $firstname = $_POST['firstname'];
 		// $middlename = $_POST['middlename'];
 		// $lastname = $_POST['lastname'];
 		// $address = $_POST['address'];
 		// $contactno = $_POST['contactno'];
+
+		// end remove existing
+
 		$checkin = $_POST['date'];
-		// $conn->query("INSERT INTO `guest` (firstname, middlename, lastname, address, contactno) VALUES('$firstname', '$middlename', '$lastname', '$address', '$contactno')") or die(mysqli_error());
 		$guestId = $_SESSION['guestId'];
 
 		// instantiate the class and call the function to check if user is allowed to book
@@ -44,7 +49,21 @@
 							if($guest_id = $fetch['guest_id']){
 								$tour_id = $_REQUEST['tour_id'];
 								$conn->query("INSERT INTO `transaction`(guest_id, tour_id, status, checkin, payment) VALUES('$guest_id', '$tour_id', 'Pending', '$checkin', 0)") or die(mysqli_error());
+								//$last_transaction_id = $conn->insert_id;
+
+								// send an email to admin for email notification
+								$to_email = 'michaelababao200@gmail.com';
+								$link = 'http://'.$_SERVER['SERVER_NAME'] . '/Thesis/raizen/admin/reserve.php';
+								$subject = 'Reservation Notification';
+								$message = 'There was a reservation made from the System. Click here to view more information: ' . $link;
+								$headers = 'From: Raizen Admin Notification';
+								$headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+
+								mail($to_email, $subject, $message, $headers);
+
+								// redirect to successful book
 								header("location:reply_reserve.php");
+
 							}else{
 								echo "<script>alert('Error Javascript Exception!')</script>";
 							}

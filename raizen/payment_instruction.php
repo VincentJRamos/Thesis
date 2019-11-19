@@ -5,7 +5,7 @@ require_once('client/client_class.php');
 $guestId = $_SESSION['guestId'];
 
 $client = new Client();
-$book_list = $client->get_book_list($guestId);
+$book_list = $client->get_book_list($guestId, 'Pending');
 
 
 ?>
@@ -26,7 +26,7 @@ $book_list = $client->get_book_list($guestId);
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<h3>You have pending reservations that doesn't exceed the minimum down payment.</h3> 
+				<h3>You have pending reservations from the list. Please make a downpayment first.</h3> 
 			</div>
 		</div>
 		<div class="row">

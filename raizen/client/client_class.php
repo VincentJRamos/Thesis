@@ -93,8 +93,6 @@ class Client {
 		// generate activation code
 		$activation_code = mt_rand(100000, 999999);
 
-		
-
 		if ($exist_username == False && $exist_email == False) {
 
 			$mysql = "INSERT INTO guest(username, password, firstname, middlename, lastname, address, contactno, email)
@@ -175,18 +173,23 @@ class Client {
 	public function send_activation_code($to_email, $activation_code) {
 
 		$subject = 'Account activation';
-		$message = 'This is from Raizen Travel and Tours. Your activation code is ' + $activation_code + '.';
+		$message = 'This is from Raizen Travel and Tours. Your activation code is ' . $activation_code . '.';
 		$headers = 'From: Raizen Travel and Tours';
 		mail($to_email, $subject, $message, $headers);
 
 	}
 
-	public function get_book_list($guest_id) {
+	public function get_book_list($guest_id, $status='') {
 
 		$query = "SELECT * FROM transaction as trans
 				  INNER JOIN tour as tr
 				  ON trans.tour_id = tr.tour_id
 				  WHERE trans.guest_id = '$guest_id'";
+
+		if ($status == 'Pending') {
+			$query .= ' AND trans.status = "Pending"';
+		}
+
 		$exec = $this->conn->query($query);
 
 		return $exec;
@@ -207,32 +210,39 @@ class Client {
 	public function check_if_can_book($guest_id) {
 
 		// select the tour price and payment of each row
-		$query = "SELECT trans.transaction_id, tour.price, trans.payment FROM transaction as trans
-				  INNER JOIN tour
-				  ON trans.tour_id = tour.tour_id
-				  WHERE guest_id = '$guest_id'";
+		// $query = "SELECT trans.transaction_id, tour.price, trans.payment FROM transaction as trans
+		// 		  INNER JOIN tour
+		// 		  ON trans.tour_id = tour.tour_id
+		// 		  WHERE guest_id = '$guest_id'";
+
+		// update 11/19/2019
+		// pinalitan ung validation from checking if paid ng half price each book -> check if naka pending p ung reservation nya
+
+		$query = "SELECT transaction_id, status FROM transaction WHERE guest_id ='$guest_id'";
 		$exec = $this->conn->query($query);
 		
 		// this increments if his bookings payment is not greater than half of the total price
-		$book_counter = 0;
+		$pending_counter = 0;
 
 		while($row = mysqli_fetch_assoc($exec))
 		{
 			// get the half price of total price
-			$half_price = $row['price'] / 2;
-
-			#echo $half_price.'<br/>';
+			// $half_price = $row['price'] / 2;
 
 			// checks if the downpayment is less than half the price
-			if ($row['payment'] < $half_price) {
-				#echo 'True';
-				$book_counter += 1;
+			// if ($row['payment'] < $half_price) {
+			// 	#echo 'True';
+			// 	$pending_counter += 1;
+			// }
+
+			// check if status is pending
+			// if pending increment by 1
+			if ($row['status'] == 'Pending') {
+				$pending_counter += 1;
 			}
 		}
 
-		#echo $book_counter;
-
-		if ($book_counter >= 3)
+		if ($pending_counter >= 3)
 		{
 			return False;
 		}
@@ -241,6 +251,53 @@ class Client {
 			return True;
 		}
 		
+	}
+
+	public function update_transaction_payment($transaction_id, $payment, $status, $bool_send_mail) {
+
+		// select the data needed first
+		$query = "SELECT trans.transaction_id, trans.payment, trans.checkin, g.firstname, g.lastname, g.email
+				  FROM transaction as trans
+				  INNER JOIN guest as g
+				  ON trans.guest_id = g.guest_id 
+				  WHERE transaction_id = $transaction_id LIMIT 1";
+		$exec = $this->conn->query($query);
+		$data = $exec->fetch_array();
+
+		// store data needed in a variable
+		$initial_payment = $data['payment'];
+		$schedule = $data['checkin'];
+		$to_email = $data['email'];
+		$name = $data['firstname'] . " " . $data['lastname'];
+
+		// add initial payment from the payment input by the admin
+		$payment = $initial_payment + $payment;
+
+		// update the payment and status column
+		$query = "UPDATE transaction SET payment = $payment, status = '$status' WHERE transaction_id = $transaction_id";
+		$exec = $this->conn->query($query);
+
+		// if status is confirmed send email notification to the guest
+		if ($status == 'Confirmed' and $bool_send_mail == 'Yes') {
+
+			$subject = 'Payment update';
+
+			$message = 'Good Day '. $name . '.';
+			$message.= ' We have receive a total of PHP ' . $payment . '.00 from your reservation with the Transaction # ' . $transaction_id . '.';
+			$message.= ' Your reservation schedule is at '. $schedule .'.';
+
+			$headers = 'From: Raizen Travel and Tours';
+
+			mail($to_email, $subject, $message, $headers);
+		}
+
+		if ($exec) {
+			return 'Transaction updated.';
+		}
+		else
+		{
+			return 'There was an error while trying to process your request.';
+		}
 	}
 
 }
