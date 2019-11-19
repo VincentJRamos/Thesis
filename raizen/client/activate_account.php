@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once('check_username.php');
 require_once('client_class.php');
 $error_message = '';
 
@@ -30,7 +31,7 @@ if (isset($_POST['activate'])) {
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Account Activation - Raizen</title>
+	<title>Account Activation - Raizen Travel and Tours</title>
 	<meta charset = "utf-8" />
 	<meta name = "viewport" content = "width=device-width, initial-scale=1.0" />
 	<link rel = "stylesheet" type = "text/css" href = "../css/bootstrap.css " />

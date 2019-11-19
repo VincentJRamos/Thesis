@@ -16,16 +16,20 @@ if (isset($_POST['register'])) {
 	$client = new Client();
 	$data = $client->register($username, $password, $firstname, $middlename, $lastname, $address, $contact, $email);
 
-	if ($data) {
+	if ($data == 'exist_username') {
+		$error_message = 'Username already exist, Please choose another one.';
+	}
+	else if ($data == 'exist_email') {
+		$error_message = 'Email already exist, Please choose another one.';
+	}
+	else if ($data) {
 		header('location: activate_account.php');
 		// if (isset($_SESSION['oldUrl'])) {
 		// 	header("location:". $_SESSION['oldUrl']);
 		// }else{
 		// 	header('location:../index.php');
 		// }
-	} else {
-		$error_message = 'Username already exist, Please choose another one.';
-	}
+	} 
 
 }
 
@@ -61,7 +65,7 @@ if (isset($_POST['register'])) {
 			  <div class="form-row">
 			    <div class="form-group col-md-6">
 			      <label for="Username">Username</label>
-			      <input type="text" class="form-control" name="username" id="Username" placeholder="Email" required>
+			      <input type="text" class="form-control" name="username" id="Username" placeholder="Username" required>
 			    </div>
 			    <div class="form-group col-md-6">
 			      <label for="Password">Password</label>

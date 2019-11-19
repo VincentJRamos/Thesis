@@ -60,7 +60,7 @@ $photo = $content->get_photo('photo');
 			<div class="container">
 				<div class="row">
                    <div style = "float:right; margin-left: -10px;" >
-		<img src = "images/raizen.jpg" width = "90" height = "80">				
+		<img src = "photo/-00000.png" width = "90" height = "80">				
 					<div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="icon-bar"></span>
@@ -76,7 +76,6 @@ $photo = $content->get_photo('photo');
 							<li><a href="#home">Home</a></li>
 							<li><a href="#about">About</a></li>
 							<li><a href="#gallery">Gallery</a></li>
-							<li><a href="#rules">Rules and Regulation</a></li>
                             <li><a href="#contactus">Contact Us</a></li>	
 							<li><a href = "book.php">Book Your Tour</a></li>
 							
@@ -84,7 +83,7 @@ $photo = $content->get_photo('photo');
 								<?php
 									session_start();
 
-									if (!isset($_SESSION['username'])) {
+									if (!isset($_SESSION['is_logged_in'])) {
 										echo '<a href = "client/login.php">Login / Register</a>';
 									}else{
 										echo '<li class="nav-item dropdown">
@@ -92,6 +91,7 @@ $photo = $content->get_photo('photo');
 										          $_SESSION['username'].
 										        '</a>
 										        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+										          <a class="dropdown-item" href="client/book_history.php">Book History</a>
 										          <a class="dropdown-item" href="client/logout.php">Logout</a>
 										        </div>
 										      </li>';
@@ -116,21 +116,20 @@ $photo = $content->get_photo('photo');
 				<div class="item active"> <!-- Change Image -->
 					<div class="caption">
 						<h1 class="animated fadeInLeftBig">Welcome to <strong>RAIZEN</strong></h1>
-						
-						
+						<a data-scroll class="learn-more animated fadeInUpBig" href="#about">Start now</a>
 					</div>
 				</div>
 				<div class="item"> <!-- Change Image -->
 					<div class="caption">
 						<h1 class="animated fadeInLeftBig"><strong>Travel</strong> and Tours</h1>
-						
+						<a data-scroll class="learn-more animated fadeInUpBig" href="#about">Start now</a>
 						
 					</div>
 				</div>
 				<div class="item"> <!-- Change Image -->
 					<div class="caption">
 						<h1 class="animated fadeInLeftBig">Enjoy <strong>Traveling</strong></h1>
-						
+						<a data-scroll class="learn-more animated fadeInUpBig" href="#about">Start now</a>
 					</div>
 				</div>
 			</div>
@@ -154,7 +153,7 @@ $photo = $content->get_photo('photo');
 					</div>
 				<div class="element-title wow fadeInDown" data-wow-duration="1s" data-wow-delay="300ms">			
 					
-                    	<div class="wrapper-why-us"><h1 style="color:gray"><strong> Mission</strong></h1>
+                    <div class="wrapper-why-us"><h1 style="color:gray"><strong> Mission</strong></h1>
                     <h3 class="main-color"><?php echo $mission;?></h3>
 					</div>
                     <div class="wrapper-why-us"><h1 style="color:gray"><strong> Vision</strong></h1>
@@ -166,7 +165,6 @@ $photo = $content->get_photo('photo');
         </div>
         </div>
     </section>
-    
  
 <!-- Gallery  -->
   <section class="section-wrapper" id="gallery">
@@ -338,6 +336,7 @@ $photo = $content->get_photo('photo');
     
     <!-- Rules -->
     
+<<<<<<< HEAD
     <section class="section-wrapper" id="rules">
     <div class="stay-in parallax">
 		<!-- Block Title -->
@@ -360,6 +359,9 @@ $photo = $content->get_photo('photo');
      
 </section> 
     
+=======
+         
+>>>>>>> c40063234602914ecc62e67628db923acb5ef908
     <!-- Contacts -->
     <section class="section-wrapper" id="contactus">
 	
@@ -434,22 +436,17 @@ $photo = $content->get_photo('photo');
     </section>
     
     
-     <section class="section-wrapper" id="reservation.php">
-	
-
-	
-		<!-- Block Title -->	
-		<div class="element-title">			
-			<div class="row">	 		
-				<div class="container">
-					<div class="section-title wow fadeInDown" data-wow-duration="1s" data-wow-delay="300ms">			
-						<h1 style="background-color:#ae8a46"><a href="reservation.php"><strong>Make A Reservation</strong></a></h1>							
-					</div>	
-                </div>
-            </div>
-        </div>
-        
-    </section>
+     <div class="bottom-footer">
+	<div class="container"> 
+		<div class="bottom-footer-center wow fadeInDown" data-wow-duration="1s" data-wow-delay="300ms">
+			<ul class="bottom-social-icons">
+				<li><a href="www.facebook.com/raizen"><i class="fa fa-facebook"></i></a></li>
+				<li><a href="www.twitter.com/raizen"><i class="fa fa-twitter"></i></a></li>
+				<li><a href="www.instagram.com/raizen"><i class="fa fa-instagram"></i></a></li>
+			</ul>
+		</div>
+     </div>
+    </div>
     
     
 <?php include ("footer.php"); ?>
