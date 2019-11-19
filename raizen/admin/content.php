@@ -26,61 +26,45 @@
 				</li>
 			</ul>
 		</div>
-	</nav>
-	<?php include ("header.php"); ?>
-	<br />
+	</nav>	
+    <?php include ("header.php"); ?>
 	<div class = "container-fluid">
 		<div class = "panel panel-default">
 			<div class = "panel-body">
-				<div class = "alert alert-info">Accounts</div>
-				<a class = "btn btn-success" href = "add_account.php"><i class = "glyphicon glyphicon-plus"></i> Create New Account</a>
-				<br />
-				<br />
+				<div class = "alert alert-info">Transaction / Content</div>
 				<table id = "table" class = "table table-bordered">
 					<thead>
 						<tr>
-							<th>Name</th>
-							<th>Username</th>
-							<th>Password</th>
+							<th>Title</th>
+							<th>Content</th>
 							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
-						<?php  
-							$query = $conn->query("SELECT * FROM `admin`") or die(mysqli_error());
-							while($fetch = $query->fetch_array()){
-						?>
+					<?php
+						$query = $conn->query("SELECT * FROM `content`") or die(mysqli_error());
+						while($fetch = $query->fetch_array()){
+					?>	
 						<tr>
-							<td><?php echo $fetch['name']?></td>
-							<td><?php echo $fetch['username']?></td>
-							<td><?php echo md5($fetch['password'])?></td>
-							<td><center><a class = "btn btn-warning" href = "edit_account.php?admin_id=<?php echo $fetch['admin_id']?>"><i class = "glyphicon glyphicon-edit"></i> Edit</a> <a class = "btn btn-danger" onclick = "confirmationDelete(this); return false;" href = "delete_account.php?admin_id=<?php echo $fetch['admin_id']?>"><i class = "glyphicon glyphicon-remove"></i> Delete</a></center></td>
+							<td><?php echo $fetch['title']?></td>
+							<td><?php echo $fetch['content']?></td>
+							
+							<td><center><a class = "btn btn-warning" href = "edit_content.php?title=<?php echo $fetch['title']?>"><i class = "glyphicon glyphicon-edit"></i> Edit</a></center></td>
 						</tr>
-						<?php
-							}
-						?>
+					<?php
+						}
+					?>	
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
-	<br />
-	<br />
-		<?php include ("footer.php"); ?>
+	<?php include ("footer.php"); ?>
 </body>
 <script src = "../js/jquery.js"></script>
 <script src = "../js/bootstrap.js"></script>
 <script src = "../js/jquery.dataTables.js"></script>
 <script src = "../js/dataTables.bootstrap.js"></script>	
-<script type = "text/javascript">
-	function confirmationDelete(anchor){
-		var conf = confirm("Are you sure you want to delete this record?");
-		if(conf){
-			window.location = anchor.attr("href");
-		}
-	} 
-</script>
-
 <script type = "text/javascript">
 	$(document).ready(function(){
 		$("#table").DataTable();

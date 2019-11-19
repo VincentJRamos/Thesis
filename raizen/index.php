@@ -1,3 +1,20 @@
+<?php
+require_once('content/content.php');
+
+$content = new Content();
+
+$mission = $content->get_content('mission');
+$vision = $content->get_content('vision');
+$rules = $content->get_content('rules');
+$address = $content->get_content('address');
+$city = $content->get_content('city');
+$workhours = $content->get_content('workhours');
+$contact = $content->get_content('contact');
+$email = $content->get_content('email');
+$photo = $content->get_photo('photo');
+
+?>
+
 <!DOCTYPE html>
 <html lang = "en">
 	<head>
@@ -6,6 +23,12 @@
     <meta charset="utf-8">
 		<title>Raizen Travel and Tours</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="css/animate.min.css" rel="stylesheet" >	
+	<link href="css/font-awesome.min.css" rel="stylesheet">	
+	<link href="css/prettyPhoto.css" rel="stylesheet">
+	
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/bootstrap-theme.min.css" rel="stylesheet">
 	<link href="css/animate.min.css" rel="stylesheet" >	
 	<link href="css/font-awesome.min.css" rel="stylesheet">	
@@ -132,10 +155,10 @@
 				<div class="element-title wow fadeInDown" data-wow-duration="1s" data-wow-delay="300ms">			
 					
                     	<div class="wrapper-why-us"><h1 style="color:gray"><strong> Mission</strong></h1>
-                    <h3 class="main-color">Our agency Raizen Travel and Tours supports the advocacy of our government in promoting the beautiful tourists spots destinations of our country. We try to do our best we can to ensure that every trip or visit of our clients will not only bring them fun, luxury, joy and pleasure but also to make sure to them that they will always remember our country, especially the foreigners as their second home. That every time they remember our country where ever they may be, they will think to come back and visit again to experience once more their one of the most memorable and unforgettable moment in their lives. Raizen travel and tours always do our best to promote and provide right information about the history and trivia of every tourist spot destination so that they will learn and have enough knowledge of our heritage.<br> Our company will continue to provide good quality service, being hospitable and bring friendship between our employees and our clients, both local and foreigners. Raizen travel and tours will be and always have the pleasure of giving service and promting our country as one of the most beautiful tourist spot destination in the world.</h3>
+                    <h3 class="main-color"><?php echo $mission;?></h3>
 					</div>
                     <div class="wrapper-why-us"><h1 style="color:gray"><strong> Vision</strong></h1>
-                    <h3 class="main-color">Our agency Raizen Travel and Tours supports the advocacy of our government in promoting the beautiful tourists spots destinations of our country. We try to do our best we can to ensure that every trip or visit of our clients will not only bring them fun, luxury, joy and pleasure but also to make sure to them that they will always remember our country, especially the foreigners as their second home. That every time they remember our country where ever they may be, they will think to come back and visit again to experience once more their one of the most memorable and unforgettable moment in their lives. Raizen travel and tours always do our best to promote and provide right information about the history and trivia of every tourist spot destination so that they will learn and have enough knowledge of our heritage.<br> Our company will continue to provide good quality service, being hospitable and bring friendship between our employees and our clients, both local and foreigners. Raizen travel and tours will be and always have the pleasure of giving service and promting our country as one of the most beautiful tourist spot destination in the world.</h3>
+                    <h3 class="main-color"><?php echo $vision;?></h3>
 					</div>
 			</div>
             </div>
@@ -172,12 +195,11 @@
 				    
 						<div class="portfolio-wrap">
 							<div class="myport wow fadeInDown" data-wow-duration="1s" data-wow-delay="600ms">
-								
-                                
+						
                                 <div class="mix category-1 portfolio" data-myorder="1">
 									<div class="img-holder">
 									<a href="images/raizenimg/gal1.jpg" >	
-											<img class="" src="images/raizenimg/gal1.jpg" alt="This is the title"> <!-- Change Image -->
+											<img class="" src="../slider/<?php echo $fetch['photo']?>" alt="This is the title"> <!-- Change Image -->
 											<div class="works-overlay">
 												<div class="img-overlay"></div>
 											</div>		
@@ -188,7 +210,7 @@
 										</a>
 									</div>		  
 								</div>
-    
+
                     <div class="mix category-2 portfolio" data-cat="category-2" data-myorder="2">
 									<div class="img-holder">
 										<a href="images/raizenimg/gal2.jpg" >									
@@ -326,8 +348,8 @@
 						<div class="container">	 		
 							<h1 class="white-color wow fadeInDown" data-wow-duration="1s" data-wow-delay="300ms"><strong>Rules and Regulations</strong></h1>
 							
-                            
-                            <h3 style="color:#000000"><center><span style="background-color:gold">Our agency Raizen Travel and Tours supports the advocacy of our government in promoting the beautiful tourists spots destinations of our country. We try to do our best we can to ensure that every trip or visit of our clients will not only bring them fun, luxury, joy and pleasure but also to make sure to them that they will always remember our country, especially the foreigners as their second home. That every time they remember our country where ever they may be, they will think to come back and visit again to experience once more their one of the most memorable and unforgettable moment in their lives. Raizen travel and tours always do our best to promote and provide right information about the history and trivia of every tourist spot destination so that they will learn and have enough knowledge of our heritage.<br> Our company will continue to provide good quality service, being hospitable and bring friendship between our employees and our clients, both local and foreigners. Raizen travel and tours will be and always have the pleasure of giving service and promting our country as one of the most beautiful tourist spot destination in the world.</span></center></h3>
+                      
+                            <h3 style="color:#000000"><center><span style="background-color:gold"><?php echo $rules;?></span></center></h3>
 					</div>
 						</div>
 					</div>
@@ -364,18 +386,18 @@
 							<div class="wrapper-contacts-icons">	
 								<div class="col-xs-4 wow fadeInRight" data-wow-duration="1s" data-wow-delay="300ms">	
 									<i class="fa fa-map-marker"></i>
-									<div class=""  style="color:gray">San Marino Square Paliparan I</div>
-									<div class="" style="color:gray">Dasmarina, Cavite</div>
+									<div class=""  style="color:gray"><?php echo $address;?></div>
+									<div class="" style="color:gray"><?php echo $city;?></div>
 								</div>								
 								<div class="col-xs-4 wow fadeInRight" data-wow-duration="1s" data-wow-delay="450ms">	
 									<i class="fa fa-mobile-phone"></i>
-									<div class="" style="color:gray">Mon - Fri 08:00 21:00</div>
-									<div class="" style="color:gray">+1800 920 8845</div>
+									<div class="" style="color:gray"><?php echo $workhours;?></div>
+									<div class="" style="color:gray"><?php echo $contact;?></div>
 								</div>
 								<div class="col-xs-4 wow fadeInRight" data-wow-duration="1s" data-wow-delay="600ms">	
 									<i class="fa fa-envelope-o"></i>
 									<div class="" style="color:gray">Feel Free to Email Us</div>
-									<div class="" style="color:gray">raizentravelandtour@gmail.com</div>
+									<div class="" style="color:gray"><?php echo $email;?></div>
 								</div>								
 								
 							</div>								
@@ -446,5 +468,6 @@
 	<script src="js/jquery.knob.min.js"></script>	
 	<script src="js/jquery.validate.min.js"></script>
 	<script src="js/custom.js"></script>	
+
     </body>
 </html>

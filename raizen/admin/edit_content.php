@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-	require 'validate.php';
+	require_once 'validate.php';
 	require 'name.php';
 ?>
 <html lang = "en">
@@ -27,19 +27,40 @@
 			</ul>
 		</div>
 	</nav>
-	<?php include ("header.php"); ?>
-	<br />
+    <?php include ("header.php"); ?>
 	<div class = "container-fluid">
 		<div class = "panel panel-default">
 			<div class = "panel-body">
-				<center><img src = "../images/raizen.jpg" width="350px" height="300px" /></center>
+				<div class = "alert alert-info">Transaction / Content / Change content</div>
+				<br />
+				<div class = "col-md-4">
+					<?php
+						$query = $conn->query("SELECT * FROM `content` WHERE `title` = '$_REQUEST[title]'") or die(mysqli_error());
+						$fetch = $query->fetch_array();
+					?>
+					<form method = "POST" enctype = "multipart/form-data">
+						<div class = "form-group">
+							<label>Title </label>
+							<input type = "text" value = "<?php echo $fetch['title']?>" class = "form-control" name = "title" readonly/>
+						</div>
+						<div class = "form-group">
+							<label>Content </label>
+							<input type = "text" value = "<?php echo $fetch['content']?>" class = "form-control" name = "content" />
+						</div>
+						<br />
+						<div class = "form-group">
+							<button name = "edit_content" class = "btn btn-warning form-control"><i class = "glyphicon glyphicon-edit"></i> Save Changes</button>
+						</div>
+					</form>
+					<?php require_once 'edit_query_content.php'?>
+				</div>
 			</div>
 		</div>
 	</div>
 	<br />
 	<br />
-		<?php include ("footer.php"); ?>
+	<?php include ("footer.php"); ?>
 </body>
 <script src = "../js/jquery.js"></script>
-<script src = "../js/bootstrap.js"></script>	
+<script src = "../js/bootstrap.js"></script>
 </html>
