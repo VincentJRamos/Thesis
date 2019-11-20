@@ -47,7 +47,9 @@
 					<form method = "POST" enctype = "multipart/form-data">
 						<div class = "form-group">
 							<label>Book Date</label>
-							<input type = "date" class = "form-control" name = "date" required = "required" />
+							<input type = "date" class = "form-control" name = "date" required = "required" /><br/>
+							<label for="no_of_participants">No. of participants</label>
+							<input type = "number" class = "form-control" name = "no_of_participants" required = "required" />
 						</div>
 						<br />
 						<div class = "form-group">

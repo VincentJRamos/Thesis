@@ -38,9 +38,10 @@ $book_list = $client->get_book_list($guest_id);
 				<tr>
 					<th>Transaction #</th>
 					<th>Tour type</th>
-					<th>Days</th>
+					<th>No. of participants</th>
 					<th>Price</th>
-					<th>Total Downpayment</th>
+					<th>Total</th>
+					<th>Downpayment</th>
 					<th>Status</th>
 					<th>Action</th>
 
@@ -54,8 +55,9 @@ $book_list = $client->get_book_list($guest_id);
 						echo "<tr>";
 						echo "<td>".$row['transaction_id']."</td>";
 						echo "<td>".$row['tour_type']."</td>";
-						echo "<td>".$row['days']."</td>";
+						echo "<td>".$row['extra_participant']."</td>";
 						echo "<td>".$row['price']."</td>";
+						echo "<td>".$row['bill']."</td>";
 						echo "<td>".$row['payment']."</td>";
 						echo "<td>".$row['status']."</td>";
 						echo '<td>
@@ -113,6 +115,15 @@ $book_list = $client->get_book_list($guest_id);
 	      			</div>
 	      			<div class="col">
 	      				<p id="display_price"></p>
+	      			</div>
+	      		</div>
+
+	      		<div class="row">
+	      			<div class="col">
+	      				<p class="text-primary">Total Bill:</p>
+	      			</div>
+	      			<div class="col">
+	      				<p id="display_bill"></p>
 	      			</div>
 	      		</div>
 
@@ -176,6 +187,7 @@ $book_list = $client->get_book_list($guest_id);
 						$('#display_days').html(data['days']);
 						$('#display_extra').html(data['extra_participant']);
 						$('#display_price').html(data['price']);
+						$('#display_bill').html(data['bill']);
 						$('#display_checkin_date').html(data['checkin']);
 						$('#display_checkin_time').html(data['checkin_time']);
 						$('#display_status').html(data['status']);

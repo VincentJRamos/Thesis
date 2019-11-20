@@ -35,25 +35,31 @@
 				<br />
 				<div class = "col-md-4">
 					<?php
-						$query = $conn->query("SELECT * FROM `gallery` WHERE `photoname` = '$_REQUEST[photoname]'") or die(mysqli_error());
+						$query = $conn->query("SELECT * FROM `gallery` WHERE `id` = '$_REQUEST[id]'") or die(mysqli_error());
 						$fetch = $query->fetch_array();
+
 					?>
-					<form method = "POST" enctype = "multipart/form-data">
+					<form method = "POST" enctype = "multipart/form-data" action="edit_query_gallery.php">
+
 						<div class = "form-group">
 							<label>Photo Name </label>
-							<input type = "text" value = "<?php echo $fetch['photoname']?>" class = "form-control" name = "photoname" />
+							<input type="hidden" value = "<?php echo $fetch['id']?>" name = "id">
+							<input type = "text" value = "<?php echo $fetch['photoname']?>" class = "form-control" name = "photoname"/>
 						</div>
+
 						<div class = "form-group">
 							<label>Image </label>
 							<div id = "preview" style = "width:150px; height :150px; border:1px solid #000;">
 								<img src = "../images/<?php echo $fetch['photo']?>" id = "lbl" width = "100%" height = "100%"/>
 							</div>
-							<input type = "file" required = "required" id = "photo" name = "photo" />
+							<input type = "file" id = "photo" name = "photo" />
 						</div>
 						<br />
+
 						<div class = "form-group">
 							<button name = "edit_gallery" class = "btn btn-warning form-control"><i class = "glyphicon glyphicon-edit"></i> Save Changes</button>
 						</div>
+
 					</form>
 					<?php require_once 'edit_query_gallery.php'?>
 				</div>

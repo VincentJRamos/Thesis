@@ -16,6 +16,7 @@
 		// end remove existing
 
 		$checkin = $_POST['date'];
+		$no_of_participants = $_POST['no_of_participants'];
 		$guestId = $_SESSION['guestId'];
 
 		// instantiate the class and call the function to check if user is allowed to book
@@ -29,6 +30,14 @@
 			$query = $conn->query("SELECT * FROM `guest` WHERE guest_id = '$guestId'") or die(mysqli_error());
 			$fetch = $query->fetch_array();
 			$query2 = $conn->query("SELECT * FROM `transaction` WHERE `checkin` = '$checkin' && `tour_id` = '$_REQUEST[tour_id]' && `status` = 'Pending'") or die(mysqli_error());
+			
+			// added by ace
+			$query_tour = $conn->query("SELECT * FROM `tour` WHERE `tour_id` = '$_REQUEST[tour_id]'") or die(mysqli_error());
+			$tour_data = $query_tour->fetch_array();
+			$tour_price = $tour_data['price'];
+			$total_bill = $tour_price * $no_of_participants;
+			// end added
+
 			$row = $query2->num_rows;
 			if($checkin < date("Y-m-d", strtotime('+8 HOURS'))){	
 					echo "<script>alert('Must be present date')</script>";
@@ -48,7 +57,7 @@
 					}else{	
 							if($guest_id = $fetch['guest_id']){
 								$tour_id = $_REQUEST['tour_id'];
-								$conn->query("INSERT INTO `transaction`(guest_id, tour_id, status, checkin, payment) VALUES('$guest_id', '$tour_id', 'Pending', '$checkin', 0)") or die(mysqli_error());
+								$conn->query("INSERT INTO `transaction`(guest_id, tour_id, extra_participant, status, checkin, bill, payment) VALUES('$guest_id', '$tour_id', '$no_of_participants','Pending', '$checkin', '$total_bill', 0)") or die(mysqli_error());
 								//$last_transaction_id = $conn->insert_id;
 
 								// send an email to admin for email notification

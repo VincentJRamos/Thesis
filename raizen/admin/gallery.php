@@ -49,7 +49,7 @@
 							<td><?php echo $fetch['photoname']?></td>
 							<td><center><img src = "../images/<?php echo $fetch['photo']?>" height = "50" width = "50"/></center></td>
 							
-							<td><center><a class = "btn btn-warning" href = "edit_gallery.php?photoname=<?php echo $fetch['photoname']?>"><i class = "glyphicon glyphicon-edit"></i> Edit</a></center></td>
+							<td><center><a class = "btn btn-warning" href = "edit_gallery.php?id=<?php echo $fetch['id']?>"><i class = "glyphicon glyphicon-edit"></i> Edit</a></center></td>
 						</tr>
 					<?php
 						}

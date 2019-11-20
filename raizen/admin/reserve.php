@@ -51,6 +51,7 @@
 							<th>Contact No.</th>
 							<th>Tour Type</th>
 							<th>Reserved Date</th>
+							<th>Total</th>
 							<th>Payment</th>
 							<th>Pending Payment</th>
 							<th>Status</th>
@@ -61,7 +62,7 @@
 						<?php
 							$query = $conn->query("SELECT * FROM `transaction` NATURAL JOIN `guest` NATURAL JOIN `tour` WHERE `status` = 'Pending' OR `status` = 'Confirmed'") or die(mysqli_error());
 							while($fetch = $query->fetch_array()){
-								$pending = $fetch['price'] - $fetch['payment'];
+								$pending = $fetch['bill'] - $fetch['payment'];
 						?>
 						<tr>
 							<th><?php echo $fetch['transaction_id']?></th>
@@ -69,6 +70,7 @@
 							<td><?php echo $fetch['contactno']?></td>
 							<td><?php echo $fetch['tour_type']?></td>
 							<td><strong><?php if($fetch['checkin'] <= date("Y-m-d", strtotime("+8 HOURS"))){echo "<label style = 'color:#ff0000;'>".date("M d, Y", strtotime($fetch['checkin']))."</label>";}else{echo "<label style = 'color:#00ff00;'>".date("M d, Y", strtotime($fetch['checkin']))."</label>";}?></strong></td>
+							<td><?php echo $fetch['bill']?></td>
 							<td><?php echo $fetch['payment']?></td>
 							<td><?php echo $pending?></td>
 							<td><?php echo $fetch['status']?></td>
@@ -107,7 +109,7 @@
 	      			<div class="col">
 	      				<p class="text-primary">Transaction #: <span id="display_tour_no"></span></p>
 	      				<p>Payment: <span id="display_payment" class="text-success"></span></p>
-	      				<p>Total: <span id="display_price" class="text-success"></span></p>
+	      				<p>Total: <span id="display_bill" class="text-success"></span></p>
 	      				<p>Pending payment: <span id="display_pending_payment" class="text-danger"></span></p>
 	      			</div>
 	      		</div>
@@ -152,9 +154,9 @@
 				success:function(data) {
 					$('#display_tour_no').html(data['transaction_id']);
 					$('#display_payment').html(data['payment']);
-					$('#display_price').html(data['price']);
+					$('#display_bill').html(data['bill']);
 
-					let pending_payment = data['price'] - data['payment'];
+					let pending_payment = data['bill'] - data['payment'];
 
 					$('#display_pending_payment').html(pending_payment);
 				}
