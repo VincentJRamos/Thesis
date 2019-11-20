@@ -35,7 +35,7 @@ class Content {
 	}
 
 	public function get_photo($photo) {
-		$query = "SELECT * FROM gallery WHERE photoname = '$photoname'";
+		$query = "SELECT * FROM gallery WHERE photoname = '$photo'";
 		$exec = $this->conn->query($query);
 
 		$data = $exec->fetch_array();
@@ -53,13 +53,8 @@ class Content {
 	public function get_photo_list() {
 		$query = "SELECT * FROM gallery";
 		$exec = $this->conn->query($query);
-		$data = $exec->fetch_array();
-		//while($fetch = $exec->fetch_array())
-		// foreach($d => $data) {
-		// 	$title = $d[]
-		// }
 
-		return $data;
+		return $exec;
 	}
 
 }

@@ -13,6 +13,8 @@ $contact = $content->get_content('contact');
 $email = $content->get_content('email');
 $photo = $content->get_photo('photo');
 
+$gallery_list = $content->get_photo_list();
+
 ?>
 
 <!DOCTYPE html>
@@ -193,132 +195,31 @@ $photo = $content->get_photo('photo');
 				    
 						<div class="portfolio-wrap">
 							<div class="myport wow fadeInDown" data-wow-duration="1s" data-wow-delay="600ms">
-						
-                                <div class="mix category-1 portfolio" data-myorder="1">
-									<div class="img-holder">
-									<a href="images/raizenimg/gal1.jpg" >	
-											<img class="" src="../slider/<?php echo $fetch['photo']?>" alt="This is the title"> <!-- Change Image -->
-											<div class="works-overlay">
-												<div class="img-overlay"></div>
-											</div>		
-											<div class="overlay-content"> 
-												<div class="works-overlay-category">IMAGE</div>															
-												<div class="works-overlay-icon"><i class="fa fa-image"></i></div>										
-											</div>	
-										</a>
-									</div>		  
-								</div>
+							
+								<?php 
+									while($row = mysqli_fetch_assoc($gallery_list))
+									{
+										$gallery_item = $row['photo'];
+								?>
+	                                <div class="mix category-1 portfolio" data-myorder="1">
+										<div class="img-holder">
+										<a href="<?php echo 'images/'.$gallery_item?>" >	
+												<img class="" src="<?php echo 'images/'.$gallery_item?>" alt="This is the title" style="width:475px;height:300px;"> 
+												<div class="works-overlay">
+													<div class="img-overlay"></div>
+												</div>		
+												<div class="overlay-content"> 
+													<div class="works-overlay-category">IMAGE</div>															
+													<div class="works-overlay-icon"><i class="fa fa-image"></i></div>										
+												</div>	
+											</a>
+										</div>		  
+									</div>
+								<?php
+									}
+								?>
 
-                    <div class="mix category-2 portfolio" data-cat="category-2" data-myorder="2">
-									<div class="img-holder">
-										<a href="images/raizenimg/gal2.jpg" >									
-										<img class="" src="images/raizenimg/gal2.jpg" alt="This is the title"> <!-- Change Image -->
-											<div class="works-overlay">
-												<div class="img-overlay"></div>
-											</div>		
-											<div class="overlay-content"> 
-												<div class="works-overlay-category">IMAGE</div>				
-                                               			
-												<div class="works-overlay-icon"><i class="fa fa-image"></i></div>		
-											</div>	
-										</a>
-									</div>	
-								</div>
-        
-          <div class="mix category-3 portfolio" data-cat="category-3" data-myorder="3">
-									<div class="img-holder">
-										<a href="images/raizenimg/gal3.jpg" >									
-										<img class="" src="images/raizenimg/gal3.jpg" alt="This is the title"> <!-- Change Image -->
-											<div class="works-overlay">
-												<div class="img-overlay"></div>
-											</div>		
-											<div class="overlay-content"> 
-												<div class="works-overlay-category">IMAGE</div>				
-                                               			
-												<div class="works-overlay-icon"><i class="fa fa-image"></i></div>			
-											</div>	
-										</a>
-									</div>	
-								</div>
-        
-          <div class="mix category-1 portfolio" data-cat="category-1" data-myorder="4">
-									<div class="img-holder">
-										<a href="images/raizenimg/gal4.jpg" >									
-										<img class="" src="images/raizenimg/gal4.jpg" alt="This is the title"> <!-- Change Image -->
-											<div class="works-overlay">
-												<div class="img-overlay"></div>
-											</div>		
-											<div class="overlay-content"> 
-												<div class="works-overlay-category">IMAGE</div>				
-                                                			
-												<div class="works-overlay-icon"><i class="fa fa-image"></i></div>			
-											</div>	
-										</a>
-									</div>	
-								</div>
-        
-          <div class="mix category-2 portfolio" data-cat="category-2" data-myorder="5">
-									<div class="img-holder">
-										<a href="images/raizenimg/gal5.jpeg" >									
-										<img class="" src="images/raizenimg/gal5.jpeg" alt="This is the title"> <!-- Change Image -->
-											<div class="works-overlay">
-												<div class="img-overlay"></div>
-											</div>		
-											<div class="overlay-content"> 
-												<div class="works-overlay-category">IMAGE</div>				
-                                               			
-												<div class="works-overlay-icon"><i class="fa fa-image"></i></div>			
-											</div>	
-										</a>
-									</div>	
-								</div>
-        
-        <div class="mix category-3 portfolio" data-cat="category-3" data-myorder="6">
-									<div class="img-holder">
-										<a href="images/raizenimg/gal6.jpeg" >	
-											<img class="" src="images/raizenimg/gal6.jpeg" alt="This is the title"> <!-- Change Image -->
-											<div class="works-overlay">
-												<div class="img-overlay"></div>
-											</div>		
-											<div class="overlay-content"> 
-												<div class="works-overlay-category">IMAGE</div>												
-												<div class="works-overlay-icon"><i class="fa fa-image"></i></div>					
-											</div>	
-										</a>
-									</div>			  
-								</div>
-        
-        
-                                <div class="mix category-1 portfolio" data-cat="category-1" data-myorder="7">
-									<div class="img-holder">
-										<a  href="images/raizenimg/gal7.jpeg" >
-											<img class="" src="images/raizenimg/gal7.jpeg" alt="This is the title"> <!-- Change Image -->
-											<div class="works-overlay">
-												<div class="img-overlay"></div>
-											</div>		
-											<div class="overlay-content"> 
-												<div class="works-overlay-category">IMAGE</div>										
-												<div class="works-overlay-icon"><i class="fa fa-image"></i></div>										
-											</div>	
-										</a>
-									</div>		  
-								</div>
-        
-                                	<div class="mix category-2 portfolio" data-cat="category-2" data-myorder="8">
-									<div class="img-holder">
-										<a  href="images/raizenimg/gal8.jpeg" >
-											<img class="" src="images/raizenimg/gal8.jpeg" alt="This is the title"> <!-- Change Image -->
-											<div class="works-overlay">
-												<div class="img-overlay"></div>
-											</div>		
-											<div class="overlay-content"> 
-												<div class="works-overlay-category">IMAGE</div>										
-																						
-												<div class="works-overlay-icon"><i class="fa fa-image"></i></div>						
-											</div>
-										</a>
-                                        </div>
-                                </div>
+
                           <div class="gap"></div>
 								<div class="gap"></div>
 							</div>
@@ -336,7 +237,6 @@ $photo = $content->get_photo('photo');
     
     <!-- Rules -->
     
-<<<<<<< HEAD
     <section class="section-wrapper" id="rules">
     <div class="stay-in parallax">
 		<!-- Block Title -->
@@ -348,7 +248,7 @@ $photo = $content->get_photo('photo');
 							<h1 class="white-color wow fadeInDown" data-wow-duration="1s" data-wow-delay="300ms"><strong>Rules and Regulations</strong></h1>
 							
                       
-                            <h3 style="color:#000000"><center><span style="background-color:gold"><?php echo $rules;?></span></center></h3>
+                            <h3><center><span class="main-color"><?php echo $rules;?></span></center></h3>
 					</div>
 						</div>
 					</div>
@@ -359,9 +259,6 @@ $photo = $content->get_photo('photo');
      
 </section> 
     
-=======
-         
->>>>>>> c40063234602914ecc62e67628db923acb5ef908
     <!-- Contacts -->
     <section class="section-wrapper" id="contactus">
 	
