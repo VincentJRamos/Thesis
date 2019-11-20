@@ -55,6 +55,10 @@
 							</select>
 						</div>
 						<div class = "form-group">
+							<label>No. of days </label>
+							<input type = "number" min = "0" max = "999999999" class = "form-control" name = "no_of_days" />
+						</div>
+						<div class = "form-group">
 							<label>Price </label>
 							<input type = "number" min = "0" max = "999999999" class = "form-control" name = "price" />
 						</div>

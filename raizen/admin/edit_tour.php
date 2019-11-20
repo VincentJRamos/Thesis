@@ -62,6 +62,10 @@
 							<input type = "number" min = "0" max = "999999999" value = "<?php echo $fetch['price']?>" class = "form-control" name = "price" />
 						</div>
 						<div class = "form-group">
+							<label>No. of days </label>
+							<input type = "number" min = "0" max = "999999999" value = "<?php echo $fetch['no_of_days']?>" class = "form-control" name = "no_of_days" />
+						</div>
+						<div class = "form-group">
 							<label>Photo </label>
 							<div id = "preview" style = "width:150px; height :150px; border:1px solid #000;">
 								<img src = "../photo/<?php echo $fetch['photo']?>" id = "lbl" width = "100%" height = "100%"/>

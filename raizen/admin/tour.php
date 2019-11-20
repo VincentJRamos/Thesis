@@ -39,6 +39,7 @@
 					<thead>
 						<tr>
 							<th>Tour Type</th>
+							<th>No. of days</th>
 							<th>Price</th>
 							<th>Photo</th>
 							<th>Action</th>
@@ -51,6 +52,7 @@
 					?>	
 						<tr>
 							<td><?php echo $fetch['tour_type']?></td>
+							<td><?php echo $fetch['no_of_days']?></td>
 							<td><?php echo $fetch['price']?></td>
 							<td><center><img src = "../photo/<?php echo $fetch['photo']?>" height = "50" width = "50"/></center></td>
 							<td><center><a class = "btn btn-warning" href = "edit_tour.php?tour_id=<?php echo $fetch['tour_id']?>"><i class = "glyphicon glyphicon-edit"></i> Edit</a> <a class = "btn btn-danger" onclick = "confirmationDelete(this); return false;" href = "delete_tour.php?tour_id=<?php echo $fetch['tour_id']?>"><i class = "glyphicon glyphicon-remove"></i>Delete</a></center></td>
