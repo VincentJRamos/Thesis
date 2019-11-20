@@ -82,13 +82,38 @@ $book_list = $client->get_book_list($guestId, 'Pending');
 	      </div>
 	      <div class="modal-body">
 	      	<div class="container">
-	      		PALAGAY DTO INSTRUCTION HOW TO MAKE A DOWN PAYMENT <br/>
+		      	<div class = "panel-body">
+					<div class = "well col-md-4">
+						<center><h5 style = "color:#000000;"><i>Please read carefully. PHP200.00 per head deposit is needed. Remaining balance can be settled on the tour.</i></h5></center>
 
-	      		step 1: magbigay ng account # ng company <br/>
-	      		step 2: email ung ticket ksama ung transaction # pati fullname ng user sa ganitong email <br/>
-	      		step 3: wait na maconfirm ni admin kung nareceive na ung payment <br/>
-	      	</div>
-	      </div>
+						<center><h4 style = "color:#000000;">Step 1: Pay via bank deposit or fund transfer to this account.</h4></center>
+						<center>
+							<h5 style="color:red"><i>
+							PSBank - Gma Cavite (Savings Account)
+							Account Name: Steve Raymond Llasus Bucsit
+							Account Number: 227361003843
+							</i></h5>
+
+						<center>
+							<h4 style = "color:#000000;">or you can pay through any of this Remittance Center:</h4>
+							<ul style="color:red">
+								<li>Palawan express</li>
+								<li>Western Union</li>
+								<li>LBC Kwarta Padala</li>
+								<li>Cebuana</li>
+							</ul>
+							<h5 style="color:red"><i>
+							Receiver: Steve Raymond Llasus Bucsit<br/>
+							Address: Paliparan 1, Dasmarinas City, Cavite
+							</i></h5>	
+						</center>
+						<hr/>
+						<center><h4 style = "color:#000000;">Step 2: Send a picture of the receipt/screenshot of the payment to raizen.test@gmail.com together with your Full Name and Transaction #.</h4></center>
+					</div>
+					<div class = "col-md-4"></div>
+				</div>
+		      	</div>
+		      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 	      </div>

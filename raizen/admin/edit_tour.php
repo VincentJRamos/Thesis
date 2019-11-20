@@ -2,6 +2,8 @@
 <?php
 	require_once 'validate.php';
 	require 'name.php';
+
+	$tour_types = $conn->query("SELECT * FROM tour_type ORDER BY tour_type_name ASC") or die(mysqli_error());
 ?>
 <html lang = "en">
 	<head>
@@ -43,18 +45,12 @@
 							<label>tour Type </label>
 							<select class = "form-control" required = required name = "tour_type">
 							<option value = "">Choose an option</option>
-				            <option value = "Ilocos Tour">Ilocos Tour</option>
-				            <option value = "Sagada Tour">Sagada Tour</option>
-				            <option value = "Baguio Tour">Baguio Tour</option>
-				            <option value = "Buscalan Tour">Buscalan Tour</option>
-				            <option value = "Baler Tour">Baler Tour</option>
-                            <option value = "Calaguas Tour">Calaguas Tour</option>
-                            <option value = "Caramoan Tour">Caramoan Tour</option>
-                            <option value = "Bicol Tour">Bicol Tour</option>
-                            <option value = "Anawangin Tour">Anawangin Tour</option>
-                            <option value = "LaUnion Tour">LaUnion Tour</option>
-                            <option value = "Burias Tour">Burias Tour</option>
-                            <option value = "Bulinao Hundred Islands Tour">Bulinao Hundred Islands Tour</option>
+				            <?php
+								while($row = mysqli_fetch_assoc($tour_types))
+								{
+									echo "<option value='".$row['id']."'>".$row['tour_type_name']."</option>";
+								}
+							?>
 							</select>
 						</div>
 						<div class = "form-group">
