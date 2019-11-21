@@ -264,10 +264,12 @@ class Client {
 	public function update_transaction_payment($transaction_id, $payment, $status, $bool_send_mail) {
 
 		// select the data needed first
-		$query = "SELECT trans.transaction_id, trans.payment, trans.checkin, g.firstname, g.lastname, g.email
+		$query = "SELECT trans.transaction_id, trans.payment, tt.tour_type_name trans.checkin, g.firstname, g.lastname, g.email
 				  FROM transaction as trans
 				  INNER JOIN guest as g
-				  ON trans.guest_id = g.guest_id 
+				  ON trans.guest_id = g.guest_id
+				  INNER JOIN tour_type as tt
+				  ON tt.id = trans.tour_id
 				  WHERE transaction_id = $transaction_id LIMIT 1";
 		$exec = $this->conn->query($query);
 		$data = $exec->fetch_array();
@@ -291,7 +293,7 @@ class Client {
 			$subject = 'Payment update';
 
 			$message = 'Good Day '. $name . '.';
-			$message.= ' We have receive a total of PHP ' . $payment . '.00 from your reservation with the Transaction # ' . $transaction_id . '.';
+			$message.= ' We have receive a total of PHP ' . $payment . '.00 from your reservation with the Transaction # ' . $transaction_id . ' and Tour type is ' . $tour_type_name .'.';
 			$message.= ' Your reservation schedule is at '. $schedule .'.';
 
 			$headers = 'From: Raizen Travel and Tours';

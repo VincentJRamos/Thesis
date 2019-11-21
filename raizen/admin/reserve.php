@@ -66,13 +66,11 @@
 
 							$status = $_GET['status'];
 
+							$mysql_query = "SELECT * FROM `transaction` NATURAL JOIN `guest` NATURAL JOIN `tour` NATURAL JOIN tour_type";
+
 							if ($status != 'All') 
 							{
-								$mysql_query = "SELECT * FROM `transaction` NATURAL JOIN `guest` NATURAL JOIN `tour` WHERE `status` = '$status'";
-							}
-							else 
-							{
-								$mysql_query = "SELECT * FROM `transaction` NATURAL JOIN `guest` NATURAL JOIN `tour`";
+								$mysql_query .= " WHERE `status` = '$status'";
 							}
 
 							$query = $conn->query($mysql_query) or die(mysqli_error());
@@ -83,7 +81,7 @@
 							<th><?php echo $fetch['transaction_id']?></th>
 							<td><?php echo $fetch['firstname']." ".$fetch['lastname']?></td>
 							<td><?php echo $fetch['contactno']?></td>
-							<td><?php echo $fetch['tour_type']?></td>
+							<td><?php echo $fetch['tour_type_name']?></td>
 							<td><strong><?php if($fetch['checkin'] <= date("Y-m-d", strtotime("+8 HOURS"))){echo "<label style = 'color:#ff0000;'>".date("M d, Y", strtotime($fetch['checkin']))."</label>";}else{echo "<label style = 'color:#00ff00;'>".date("M d, Y", strtotime($fetch['checkin']))."</label>";}?></strong></td>
 							<td>PHP <?php echo $fetch['bill']?>.00</td>
 							<td>PHP <?php echo $fetch['payment']?>.00</td>

@@ -45,7 +45,8 @@
 						</div>
 						<div class = "form-group">
 							<label>Content </label>
-							<input type = "text" value = "<?php echo $fetch['content']?>" class = "form-control" name = "content" />
+							<textarea name="content" class="form-control" cols="30" rows="10"><?php echo $fetch['content']?></textarea>
+							<!-- <input type = "text" value = "<?php echo $fetch['content']?>" class = "form-control" name = "content" /> -->
 						</div>
 						<br />
 						<div class = "form-group">
