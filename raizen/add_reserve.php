@@ -30,7 +30,7 @@
 				<br />
 				<?php 
 					require_once 'admin/connect.php';
-					$query = $conn->query("SELECT * FROM `tour` WHERE `tour_id` = '$_REQUEST[tour_id]'") or die(mysql_error());
+					$query = $conn->query("SELECT * FROM `tour` INNER JOIN `tour_type` ON tour.tour_type = tour_type.id WHERE `tour_id` = '$_REQUEST[tour_id]'") or die(mysql_error());
 					$fetch = $query->fetch_array();
 				?>
 				<div style = "height:300px; width:800px;">
