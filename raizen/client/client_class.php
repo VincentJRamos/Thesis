@@ -264,7 +264,7 @@ class Client {
 	public function update_transaction_payment($transaction_id, $payment, $status, $bool_send_mail) {
 
 		// select the data needed first
-		$query = "SELECT trans.transaction_id, trans.payment, tt.tour_type_name trans.checkin, g.firstname, g.lastname, g.email
+		$query = "SELECT trans.transaction_id, trans.payment, tt.tour_type_name, trans.checkin, g.firstname, g.lastname, g.email
 				  FROM transaction as trans
 				  INNER JOIN guest as g
 				  ON trans.guest_id = g.guest_id
@@ -279,6 +279,7 @@ class Client {
 		$schedule = $data['checkin'];
 		$to_email = $data['email'];
 		$name = $data['firstname'] . " " . $data['lastname'];
+		$tour_type_name = $data['tour_type_name'];
 
 		// add initial payment from the payment input by the admin
 		$payment = $initial_payment + $payment;
@@ -293,7 +294,7 @@ class Client {
 			$subject = 'Payment update';
 
 			$message = 'Good Day '. $name . '.';
-			$message.= ' We have receive a total of PHP ' . $payment . '.00 from your reservation with the Transaction # ' . $transaction_id . ' and Tour type is ' . $tour_type_name .'.';
+			$message.= ' We have receive a total of PHP ' . $payment . '.00 from your reservation with the Transaction # ' . $transaction_id . ' and you Tour package is ' . $tour_type_name .'.';
 			$message.= ' Your reservation schedule is at '. $schedule .'.';
 
 			$headers = 'From: Raizen Travel and Tours';
@@ -308,6 +309,16 @@ class Client {
 		{
 			return 'There was an error while trying to process your request.';
 		}
+	}
+
+
+	public function get_content_email() {
+
+		$query = "SELECT * FROM content WHERE title = 'email' LIMIT 1";
+		$exec = $this->conn->query($query);
+		$fetch = $exec->fetch_array();
+
+		return $fetch['content'];
 	}
 
 }

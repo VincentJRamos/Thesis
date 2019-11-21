@@ -61,7 +61,7 @@
 								//$last_transaction_id = $conn->insert_id;
 
 								// send an email to admin for email notification
-								$to_email = 'michaelababao200@gmail.com';
+								$to_email = $client->get_content_email();
 								$link = 'http://'.$_SERVER['SERVER_NAME'] . '/Thesis/raizen/admin/reserve.php';
 								$subject = 'Reservation Notification';
 								$message = 'There was a reservation made from the System. Click here to view more information: ' . $link;
