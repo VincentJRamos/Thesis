@@ -66,7 +66,7 @@
 
 							$status = $_GET['status'];
 
-							$mysql_query = "SELECT * FROM `transaction` NATURAL JOIN `guest` NATURAL JOIN `tour` NATURAL JOIN tour_type";
+							$mysql_query = "SELECT * FROM `transaction` NATURAL JOIN `guest` NATURAL JOIN `tour` INNER JOIN tour_type ON tour_type.id = tour.tour_id";
 
 							if ($status != 'All') 
 							{
