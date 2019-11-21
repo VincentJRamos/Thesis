@@ -32,15 +32,18 @@
 	<div class = "container-fluid">	
 		<div class = "panel panel-default">
 			<?php
-				$q_p = $conn->query("SELECT COUNT(*) as total FROM `transaction` WHERE `status` = 'Pending'") or die(mysqli_error());
+				$q_p = $conn->query("SELECT COUNT(*) as total FROM `transaction`") or die(mysqli_error());
 				$f_p = $q_p->fetch_array();
 				$q_ci = $conn->query("SELECT COUNT(*) as total FROM `transaction` WHERE `status` = 'Check In'") or die(mysqli_error());
 				$f_ci = $q_ci->fetch_array();
 			?>
 			<div class = "panel-body">
-				<a class = "btn btn-success disabled"><span class = "badge"><?php echo $f_p['total']?></span> Pendings</a>
-				<a class = "btn btn-info" href = "checkin.php"><span class = "badge"><?php echo $f_ci['total']?></span> Check In</a>
-				<a class = "btn btn-warning" href = "checkout.php"><i class = "glyphicon glyphicon-eye-open"></i> Check Out</a>
+				<a href="reserve.php?status=All" class = "btn btn-success"><span class = "badge"><?php echo $f_p['total']?></span> All</a>
+				<a href="reserve.php?status=Pending" class = "btn btn-danger"> Pending</a>
+				<a href="reserve.php?status=Confirmed" class = "btn btn-primary"> Confirmed</a>
+				<a href="reserve.php?status=Closed" class = "btn btn-info"> Closed</a>
+				<!-- <a class = "btn btn-info" href = "checkin.php"><span class = "badge"><?php echo $f_ci['total']?></span> Check In</a> -->
+				<!-- <a class = "btn btn-warning" href = "checkout.php"><i class = "glyphicon glyphicon-eye-open"></i> Check Out</a> -->
 				<br/>
 				<br/>
 				<table id = "table" class = "table table-bordered">
@@ -60,7 +63,19 @@
 					</thead>
 					<tbody>
 						<?php
-							$query = $conn->query("SELECT * FROM `transaction` NATURAL JOIN `guest` NATURAL JOIN `tour` WHERE `status` = 'Pending' OR `status` = 'Confirmed'") or die(mysqli_error());
+
+							$status = $_GET['status'];
+
+							if ($status != 'All') 
+							{
+								$mysql_query = "SELECT * FROM `transaction` NATURAL JOIN `guest` NATURAL JOIN `tour` WHERE `status` = '$status'";
+							}
+							else 
+							{
+								$mysql_query = "SELECT * FROM `transaction` NATURAL JOIN `guest` NATURAL JOIN `tour`";
+							}
+
+							$query = $conn->query($mysql_query) or die(mysqli_error());
 							while($fetch = $query->fetch_array()){
 								$pending = $fetch['bill'] - $fetch['payment'];
 						?>
@@ -70,9 +85,9 @@
 							<td><?php echo $fetch['contactno']?></td>
 							<td><?php echo $fetch['tour_type']?></td>
 							<td><strong><?php if($fetch['checkin'] <= date("Y-m-d", strtotime("+8 HOURS"))){echo "<label style = 'color:#ff0000;'>".date("M d, Y", strtotime($fetch['checkin']))."</label>";}else{echo "<label style = 'color:#00ff00;'>".date("M d, Y", strtotime($fetch['checkin']))."</label>";}?></strong></td>
-							<td><?php echo $fetch['bill']?></td>
-							<td><?php echo $fetch['payment']?></td>
-							<td><?php echo $pending?></td>
+							<td>PHP <?php echo $fetch['bill']?>.00</td>
+							<td>PHP <?php echo $fetch['payment']?>.00</td>
+							<td>PHP <?php echo $pending?>.00</td>
 							<td><?php echo $fetch['status']?></td>
                             <td>
                             	<center>
@@ -80,7 +95,11 @@
 									<i class = "glyphicon glyphicon-edit"></i> Update payment
 									</button>
 
-	                            	<a class = "btn btn-success" href = "confirm_reserve.php?transaction_id=<?php echo $fetch['transaction_id']?>"><i class = "glyphicon glyphicon-check"></i> Check In</a>
+									<button type="button" class="btn btn-info mark_closed_trans" data-toggle="modal" data-target="#mark_closed_modal" data-id="<?php echo $fetch['transaction_id']?>">
+									Mark closed
+									</button>
+
+	                            	<!-- <a class = "btn btn-success" href = "confirm_reserve.php?transaction_id=<?php echo $fetch['transaction_id']?>"><i class = "glyphicon glyphicon-check"></i> Check In</a> -->
 
 	                            	<a class = "btn btn-danger" onclick = "confirmationDelete(); return false;" href = "delete_pending.php?transaction_id=<?php echo $fetch['transaction_id']?>"><i class = "glyphicon glyphicon-trash"></i> Discard</a>
                             	</center>
@@ -95,6 +114,25 @@
 		</div>
 	</div>
 	<?php include ("footer.php"); ?>
+
+	<div class="modal fade" id="mark_closed_modal" tabindex="-1" role="dialog" aria-labelledby="mark_closed_modal_label" aria-hidden="true">
+	  <div class="modal-dialog modal-sm" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title text-primary">Mark as Closed | Transaction no.: <span id="display_transaction_id"></span></h5>
+	      </div>
+	      <div class="modal-body">
+
+	      	<p class="text-warning">Are you sure you want to mark this transaction as closed?</p>
+
+	      </div>
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-success" id="mark_closed_btn" data-dismiss="modal">Yes</button>
+	        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
 
 	<div class="modal fade" id="update_payment_modal" tabindex="-1" role="dialog" aria-labelledby="update_payment_modal_label" aria-hidden="true">
@@ -142,6 +180,37 @@
 <script type = "text/javascript">
 	$(document).ready(function(){
 		$("#table").DataTable();
+
+		$(".mark_closed_trans").click(function(){
+			let transaction_id = $(this).attr('data-id');
+
+			$.ajax({
+				url: '../client/request/get_transaction_details.php',
+				type: 'POST',
+				dataType: 'json',
+				data: {'transaction_id': transaction_id},
+				success:function(data) {
+					$('#display_transaction_id').html(data['transaction_id']);
+				}
+			});
+
+		});
+
+		$("#mark_closed_btn").click(function(){
+			let transaction_id = $('#display_transaction_id').html();
+
+			$.ajax({
+				url: '../client/request/mark_closed.php',
+				type: 'POST',
+				dataType: 'json',
+				data: {'transaction_id': transaction_id},
+				success:function(data) {
+					alert(data);
+					window.location.reload();
+				}
+			});
+
+		});
 
 		$(".get_book_details").click(function(){
 			let transaction_id = $(this).attr('data-id');

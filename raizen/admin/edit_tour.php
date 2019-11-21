@@ -48,7 +48,15 @@
 				            <?php
 								while($row = mysqli_fetch_assoc($tour_types))
 								{
-									echo "<option value='".$row['id']."'>".$row['tour_type_name']."</option>";
+									if ($row['id'] == $fetch['tour_type'])
+									{
+										echo "<option value='".$row['id']."' selected>".$row['tour_type_name']."</option>";
+									}
+									else
+									{
+										echo "<option value='".$row['id']."'>".$row['tour_type_name']."</option>";
+									}
+									
 								}
 							?>
 							</select>

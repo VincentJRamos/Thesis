@@ -242,7 +242,7 @@ class Client {
 			}
 		}
 
-		if ($pending_counter >= 3)
+		if ($pending_counter >= 1)
 		{
 			return False;
 		}
@@ -251,6 +251,14 @@ class Client {
 			return True;
 		}
 		
+	}
+
+	public function mark_as_closed($transaction_id) {
+
+		$query = "UPDATE transaction SET status = 'Closed' WHERE transaction_id = '$transaction_id'";
+		if($this->conn->query($query)) {
+			return 'Transaction has mark as closed';
+		}
 	}
 
 	public function update_transaction_payment($transaction_id, $payment, $status, $bool_send_mail) {
