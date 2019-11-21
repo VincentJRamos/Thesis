@@ -31,7 +31,7 @@
 				<strong><h3 style = "color:#000000;">BOOK YOUR TOUR</h3></strong>
 				<?php
 					require_once 'admin/connect.php';
-					$query = $conn->query("SELECT * FROM `tour` ORDER BY `price` ASC") or die(mysql_error());
+					$query = $conn->query("SELECT * FROM `tour` INNER JOIN tour_type ON tour.tour_type = tour_type.id ORDER BY `price` ASC") or die(mysql_error());
 					while($fetch = $query->fetch_array()){
 				?>
 					<div class = "well" style = "height:300px; width:100%;">
@@ -39,7 +39,7 @@
 							<img src = "photo/<?php echo $fetch['photo']?>" height = "250" width = "350"/>
 						</div>
 						<div style = "float:left; margin-left:10px;">
-							<h3 style = "color:#000000;"><?php echo $fetch['tour_type']?></h3>
+							<h3 style = "color:#000000;"><?php echo $fetch['tour_type_name']?></h3>
 							<h4 style = "color:#00ff00;"><?php echo "Price: Php. ".$fetch['price'].".00"?></h4>
 							<br /><br /><br /><br /><br /><br />
 							<a style = "margin-left:580px;" href = "add_reserve.php?tour_id=<?php echo $fetch['tour_id']?>" class = "btn btn-info"><i class = "glyphicon glyphicon-list"></i>Book Now!</a>
