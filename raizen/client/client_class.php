@@ -268,8 +268,10 @@ class Client {
 				  FROM transaction as trans
 				  INNER JOIN guest as g
 				  ON trans.guest_id = g.guest_id
+                  INNER JOIN tour as t
+                  ON t.tour_id = trans.tour_id
 				  INNER JOIN tour_type as tt
-				  ON tt.id = trans.tour_type
+				  ON tt.id = t.tour_type
 				  WHERE transaction_id = $transaction_id LIMIT 1";
 		$exec = $this->conn->query($query);
 		$data = $exec->fetch_array();
