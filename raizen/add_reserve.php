@@ -38,7 +38,7 @@
 						<img src = "photo/<?php echo $fetch['photo']?>" height = "300px" width = "400px">
 					</div>
 					<div style = "float:left; margin-left:10px;">
-						<h3 style = "color:#000000;"><?php echo $fetch['tour_type']?></h3>
+						<h3 style = "color:#000000;"><?php echo $fetch['tour_type_name']?></h3>
 						<h3 style = "color:#00ff00;"><?php echo "Php. ".$fetch['price'].".00";?></h3>
 					</div>
 				</div>
