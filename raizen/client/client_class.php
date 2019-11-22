@@ -323,6 +323,15 @@ class Client {
 		return $fetch['content'];
 	}
 
+	public function get_tour_details($tour_id) {
+
+		$query = "SELECT * FROM content WHERE title = 'email' LIMIT 1";
+		$exec = $this->conn->query($query);
+		$fetch = $exec->fetch_array();
+
+		return $fetch
+	}
+
 }
 
 

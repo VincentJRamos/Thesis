@@ -42,7 +42,8 @@
 							<h3 style = "color:#000000;"><?php echo $fetch['tour_type_name']?></h3>
 							<h4 style = "color:#00ff00;"><?php echo "Price: Php. ".$fetch['price'].".00"?></h4>
 							<br /><br /><br /><br /><br /><br />
-							<a style = "margin-left:580px;" href = "add_reserve.php?tour_id=<?php echo $fetch['tour_id']?>" class = "btn btn-info"><i class = "glyphicon glyphicon-list"></i>Book Now!</a>
+							<button style = "margin-left:450px;" type="button" class="btn btn-info get_other_details" data-toggle="modal" data-target="#get_tour_details_modal" data-id="<?php echo $fetch['tour_id']?>">View details</button>
+							<a href = "add_reserve.php?tour_id=<?php echo $fetch['tour_id']?>" class = "btn btn-info"><i class = "glyphicon glyphicon-list"></i>Book Now!</a>
 						</div>
 					</div>
 				<?php
@@ -51,8 +52,29 @@
 			</div>
 		</div>
     </div>
+
+    <div class="modal fade" id="get_tour_details_modal" tabindex="-1" role="dialog" aria-labelledby="get_tour_details_modal_label" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title text-primary">Details <span id="display_transaction_id"></span></h5>
+	      </div>
+	      <div class="modal-body">
+
+	      	<div class="content">
+	      		
+	      	</div>
+
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" id="testqwe" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
 	<?php include ("footer.php"); ?>
-    	
+
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/retina.min.js"></script>
@@ -65,6 +87,27 @@
 	<script src="js/jquery.knob.min.js"></script>	
 	<script src="js/jquery.validate.min.js"></script>
     <script src="js/custom.js"></script>
+
+    <script type = "text/javascript">
+    	$(document).ready(function(){
+
+			$(".get_other_details").click(function(){
+				let tour_id = $(this).attr('data-id');
+
+				alert(tour_id);
+
+				$.ajax({
+					url: '../client/request/get_tour_details.php',
+					type: 'POST',
+					dataType: 'json',
+					data: {'tour_id': tour_id},
+					success:function(data) {
+						console.log(data);
+					}
+			});
+
+		});
+    </script>
 
 </body>	
 </html>

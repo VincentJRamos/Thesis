@@ -60,6 +60,22 @@
 							<label>Price </label>
 							<input type = "number" min = "0" max = "999999999" class = "form-control" name = "price" />
 						</div>
+
+						<div class="form-group">
+							<label for="package_inclusions">Package Inclusions</label>
+							<textarea name="package_inclusions" class="form-control" cols="30" rows="10"></textarea>
+						</div>
+
+						<div class="form-group">
+							<label for="sites_to_visit">Sites to Visit</label>
+							<textarea name="sites_to_visit" class="form-control" cols="30" rows="10"></textarea>
+						</div>
+
+						<div class="form-group">
+							<label for="remarks">Others</label>
+							<textarea name="remarks" class="form-control" cols="30" rows="10"></textarea>
+						</div>
+						
 						<div class = "form-group">
 							<label>Photo </label>
 							<div id = "preview" style = "width:150px; height :150px; border:1px solid #000;">
