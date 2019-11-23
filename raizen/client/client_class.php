@@ -325,11 +325,11 @@ class Client {
 
 	public function get_tour_details($tour_id) {
 
-		$query = "SELECT * FROM content WHERE title = 'email' LIMIT 1";
+		$query = "SELECT * FROM tour INNER JOIN tour_type ON tour.tour_type = tour_type.id WHERE tour_id = '$tour_id' LIMIT 1";
 		$exec = $this->conn->query($query);
 		$fetch = $exec->fetch_array();
 
-		return $fetch
+		return $fetch;
 	}
 
 }

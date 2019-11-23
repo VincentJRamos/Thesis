@@ -3,10 +3,10 @@ require_once('../client_class.php');
 
 $client = new Client();
 
-$transaction_id = $_POST['transaction_id'];
+$tour_id = $_POST['tour_id'];
 
-$transaction_details = $client->get_tour_details($transaction_id);
+$tour_details = $client->get_tour_details($tour_id);
 
-echo json_encode($transaction_details);
+echo json_encode($tour_details);
 
 ?>

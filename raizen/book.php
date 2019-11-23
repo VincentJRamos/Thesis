@@ -56,17 +56,25 @@
     <div class="modal fade" id="get_tour_details_modal" tabindex="-1" role="dialog" aria-labelledby="get_tour_details_modal_label" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title text-primary">Details <span id="display_transaction_id"></span></h5>
+	      <div class="modal-header bg-primary">
+	        <h5 class="modal-title text-light"><span id="display_tour_type"></span></h5>
+	        <h5 class="text-light"><span id="display_price" class="text-light"></span></h5>
 	      </div>
 	      <div class="modal-body">
-
+	      	
 	      	<div class="content">
-	      		
+	      		<label for="display_package_inclusions" class="text-primary">Package inclusions:</label>
+	      		<textarea id="display_package_inclusions" cols="15" rows="15" class="form-control" disabled></textarea>
+
+	      		<label for="display_sites_to_visit" class="text-primary">Sites to visit:</label>
+	      		<textarea id="display_sites_to_visit" cols="15" rows="15" class="form-control" disabled></textarea>
+
+	      		<label for="display_remarks" class="text-primary">Others:</label>
+	      		<textarea id="display_remarks" cols="15" rows="15" class="form-control" disabled></textarea>
 	      	</div>
 
 	      </div>
-	      <div class="modal-footer">
+	      <div class="modal-footer bg-primary">
 	        <button type="button" class="btn btn-danger" id="testqwe" data-dismiss="modal">Close</button>
 	      </div>
 	    </div>
@@ -94,16 +102,22 @@
 			$(".get_other_details").click(function(){
 				let tour_id = $(this).attr('data-id');
 
-				alert(tour_id);
-
 				$.ajax({
-					url: '../client/request/get_tour_details.php',
+					url: 'client/request/get_tour_details.php',
 					type: 'POST',
 					dataType: 'json',
 					data: {'tour_id': tour_id},
 					success:function(data) {
 						console.log(data);
+
+						let price = 'PHP ' + data['price'] + '.00';
+						$('#display_tour_type').html(data['tour_type_name']);
+						$('#display_price').html(price);
+						$('#display_package_inclusions').html(data['package_inclusions']);
+						$('#display_sites_to_visit').html(data['sites_to_visit']);
+						$('#display_remarks').html(data['remarks']);
 					}
+				});
 			});
 
 		});

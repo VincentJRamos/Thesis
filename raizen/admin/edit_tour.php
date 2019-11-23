@@ -1,10 +1,11 @@
-<!DOCTYPE html>
 <?php
 	require_once 'validate.php';
 	require 'name.php';
 
 	$tour_types = $conn->query("SELECT * FROM tour_type ORDER BY tour_type_name ASC") or die(mysqli_error());
 ?>
+
+<!DOCTYPE html>
 <html lang = "en">
 	<head>
 		<title>Raizen Travel and Tours</title>
