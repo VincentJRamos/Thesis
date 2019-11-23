@@ -51,7 +51,7 @@ $book_list = $client->get_book_list($guestId, 'Pending');
 						<div class="card" style="width: 18rem;">
 						  <img src = "photo/<?php echo $row['photo']?>" height = "250" width = "350" alt="tour_photo"/>
 						  <div class="card-body">
-						    <h5 class="card-title text-primary"><strong><?php echo $row['tour_type'] ?></strong></h5>
+						    <h5 class="card-title text-primary"><strong><?php echo $row['tour_type_name'] ?></strong></h5>
 						    <p class="card-text">
 						    	<?php
 						    		echo "Transaction #: ". $row['transaction_id']. "<br/>";

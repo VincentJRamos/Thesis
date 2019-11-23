@@ -184,6 +184,8 @@ class Client {
 		$query = "SELECT * FROM transaction as trans
 				  INNER JOIN tour as tr
 				  ON trans.tour_id = tr.tour_id
+				  LEFT JOIN tour_type as tt
+				  ON tt.id = tr.tour_type
 				  WHERE trans.guest_id = '$guest_id'";
 
 		if ($status == 'Pending') {

@@ -59,6 +59,7 @@
 	      <div class="modal-header bg-primary">
 	        <h5 class="modal-title text-light"><span id="display_tour_type"></span></h5>
 	        <h5 class="text-light"><span id="display_price" class="text-light"></span></h5>
+	        <h5 class="text-light"><span id="display_no_of_days" class="text-light"></span></h5>
 	      </div>
 	      <div class="modal-body">
 	      	
@@ -111,8 +112,10 @@
 						console.log(data);
 
 						let price = 'PHP ' + data['price'] + '.00';
+						let days = data['no_of_days'] + ' Days'
 						$('#display_tour_type').html(data['tour_type_name']);
 						$('#display_price').html(price);
+						$('#display_no_of_days').html(days);
 						$('#display_package_inclusions').html(data['package_inclusions']);
 						$('#display_sites_to_visit').html(data['sites_to_visit']);
 						$('#display_remarks').html(data['remarks']);
