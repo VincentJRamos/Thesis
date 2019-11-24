@@ -44,10 +44,10 @@
 				</div>
 				<br style = "clear:both;" />
 				<div class = "well col-md-4" style = "color:#000000;">
-					<form method = "POST" enctype = "multipart/form-data">
+					<form method = "POST" enctype = "multipart/form-data" autocomplete="off">
 						<div class = "form-group">
 							<label>Book Date</label>
-							<input type = "date" class = "form-control" name = "date" required = "required" /><br/>
+							<input type = "text" class = "form-control datepicker" name = "date" required = "required" /><br/>
 							<label for="no_of_participants">No. of participants</label>
 							<input type = "number" class = "form-control" name = "no_of_participants" required = "required" />
 						</div>
@@ -65,7 +65,42 @@
 	<br />
 	<br />
 		<?php include ("footer.php"); ?>
+
+		<?php 
+
+// get the dates blocked from database for specific tour
+$query = $conn->query("SELECT block_date FROM tour_closed_dates WHERE tour_id = '$_REQUEST[tour_id]'") or die(mysql_error());
+
+$disabled_dates = '';
+
+while($fetch_date = $query->fetch_array()){
+	$disabled_dates .= "'". $fetch_date['block_date'] . "', ";
+	//array_push($start_date, $fetch_dates['date_start']);
+}
+
+?>
 </body>
+
+
 <script src = "js/jquery.js"></script>
-<script src = "js/bootstrap.js"></script>	
+<script src = "js/bootstrap.js"></script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+  $( function() {
+
+  	var array = [<?php echo $disabled_dates; ?>]
+
+    $( ".datepicker" ).datepicker({
+    	beforeShowDay: function(date){
+	        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+	        return [ array.indexOf(string) == -1 ]
+    	}
+    });
+  } );
+</script>
 </html>
