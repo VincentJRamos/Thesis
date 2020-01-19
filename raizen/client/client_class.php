@@ -113,7 +113,7 @@ class Client {
 			$_SESSION['fullName'] = $data['firstname'] . " " . $data['middlename'] . " " . $data['lastname'];
 			$_SESSION['guestId'] = $data['guest_id'];
 			$_SESSION['username'] = $data['username'];
-			//$_SESSION['email'] = $data['email'];
+			$_SESSION['email'] = $data['email'];
 
 			// send email to the guest
 			$this->send_activation_code($email, $activation_code);
@@ -202,6 +202,8 @@ class Client {
 		$query = "SELECT * FROM transaction as trans
 				  INNER JOIN tour as tr
 				  ON trans.tour_id = tr.tour_id
+				  INNER JOIN tour_type as tt
+				  ON tr.tour_type = tt.id
 				  WHERE trans.transaction_id = '$transaction_id'";
 		$exec = $this->conn->query($query);
 		$data = $exec->fetch_array();

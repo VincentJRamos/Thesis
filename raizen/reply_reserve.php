@@ -1,3 +1,21 @@
+<?php
+session_start();
+
+$fullname = $_SESSION['fullName'];
+$email = $_SESSION['email'];
+$amount = $_GET['amount'];
+// make default payment to half
+$amount = $amount / 2;
+
+$invoice_no = $_GET['invoice_no'];
+$remarks = $_GET['remarks'];
+
+$dragonpay_url = 'https://test.dragonpay.ph/GenPay.aspx?merchantid=SAMPLEGEN&amount='.$amount.'&invoiceno='.$invoice_no.'&name='.$fullname.'&email='.$email.'&remarks='.$remarks;
+
+echo $dragonpay_url;
+
+?>
+
 <!DOCTYPE html>
 <html lang = "en">
 	<head>
@@ -20,14 +38,20 @@
 	<div style = "margin-left:0;" class = "container">
 		<div class = "panel panel-default">
 			<div class = "panel-body">
-				<strong><h3 style = "color:#000000;">Congratulations. Your book is successful!.</h3></strong>
+				<strong><h3 style = "color:#000000;">Congratulations. Your book is successful!</h3></strong>
 				<strong><h3 style = "color:#000000;">To confirm your book. Please make a downpayment.</h3></strong>
 				<br />
-				<div class = "col-md-4"></div>
-				<div class = "well col-md-4">
+
+			
+				<div class = "well col-md-12">
+
 					<center><h3 style = "color:#000000;">How to make a downpayment.</h3></center>
 					<br />
 
+					<h3 style = "color:#000000;">You can pay using DRAGON PAY <a href="<?php echo $dragonpay_url; ?>" target="_blank">here</a>.</h3>
+					<br/>
+					<h3 style = "color:#000000;">Manual Remittance or Over the bank payment.</h3>
+					<br/>
 					<center><h5 style = "color:#000000;"><i>Please read carefully. PHP200.00 per head deposit is needed. Remaining balance can be settled on the tour.</i></h5></center>
 
 					<center><h4 style = "color:#000000;">Step 1: Pay via bank deposit or fund transfer to this account.</h4></center>

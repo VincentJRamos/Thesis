@@ -76,10 +76,20 @@
 					// 			}
 					// 		"</div>";
 					// }else{	
+
+
 					if($guest_id = $fetch['guest_id']){
 						$tour_id = $_REQUEST['tour_id'];
 						$conn->query("INSERT INTO `transaction`(guest_id, tour_id, extra_participant, status, checkin, bill, payment) VALUES('$guest_id', '$tour_id', '$no_of_participants','Pending', '$checkin', '$total_bill', 0)") or die(mysqli_error());
-						//$last_transaction_id = $conn->insert_id;
+						$last_transaction_id = $conn->insert_id;
+
+						$book_data = $client->get_transaction_details($last_transaction_id);
+
+						$tour_name = $book_data['tour_type_name'];
+						$days = $book_data['no_of_days'];
+						$extra_participant = $book_data['extra_participant'];
+
+						$remarks = 'Tour: '. $tour_name . ' | Days: '. $days . ' | Extra participant: ' . $extra_participant;
 
 						// send an email to admin for email notification
 						$to_email = $client->get_content_email();
@@ -91,8 +101,9 @@
 
 						mail($to_email, $subject, $message, $headers);
 
-						// redirect to successful book
-						header("location:reply_reserve.php");
+						// redirect to successful book with GET parameters for the invoice no., total and remarks.
+						header("location:reply_reserve.php?invoice_no=".$last_transaction_id.'&amount='.$total_bill.'&remarks='.$remarks);
+
 
 					}else{
 						echo "<script>alert('Error Javascript Exception!')</script>";
