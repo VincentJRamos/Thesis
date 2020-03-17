@@ -15,11 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$insert_data = $contactSupport->add_contactsupport($name, $email, $subject, $message);
 
 	$to_email = $client->get_content_email();
-	$headers = 'From: Raizen Admin Notification';
-	$headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+	$headers = 'From: Raizen Chat Support Notification';
 
 	if ($insert_data) {
-		mail($to_email, $subject, $message, $headers);
+		$email_message = 'Name: '. $name . "\n" . 'Email: ' . $email . "\n" . 'Message: ' . $message;
+		mail($to_email, $subject, $email_message, $headers);
 		echo 'True';
 
 	}

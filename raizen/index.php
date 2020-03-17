@@ -39,11 +39,17 @@ $gallery_list = $content->get_photo_list();
 	<link href="css/theme.css" rel="stylesheet">	
 	<link href="css/responsive.css" rel="stylesheet">
 	<link href="css/colors/golden.css" rel="stylesheet" class="colors">
+
+	<style>
+		#contactModal {
+			top: 20%;
+		}
+	</style>
         
 	</head>
 <body data-spy="scroll" data-target="#mynav" data-offset="85">
     
-    <div id="preloader">
+<div id="preloader">
 	<div id="status">
 		<div class="spinner">
 			  <div class="rect1"></div>
@@ -351,10 +357,10 @@ $gallery_list = $content->get_photo_list();
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title text-primary">Success</h5>
+	        <h2 class="modal-title" style="color:#0000b3; font-weight: bold;">Thank you!</h2>
 	      </div>
 	      <div class="modal-body">
-	          <h2 style="color:#0000b3; font-weight: bold;">Thank you for letting us know your concern, Kindly wait for our response to the email you have specified.</h2>
+	          <h3 style="color:#0000b3; font-weight: bold;">We've got your concern, Kindly wait for our response to the email you have specified.</h3>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -415,6 +421,10 @@ $gallery_list = $content->get_photo_list();
 					return;
 				}
 
+				$('#status').show();
+				$('#preloader').show();
+				
+
 				$.ajax({
 					url: form.attr('action'),
 					type: form.attr('method'),
@@ -425,6 +435,10 @@ $gallery_list = $content->get_photo_list();
 						'message': message,
 					},
 					success:function(data){
+
+						$('#status').delay(100).fadeOut('slow');
+						$('#preloader').delay(500).fadeOut('slow');
+
 						if (data === 'True') {
 							$('#contactModal').modal('show');
 							$("input[name='name']").val('');
