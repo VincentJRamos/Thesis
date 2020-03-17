@@ -31,6 +31,7 @@
 	<div style = "margin-left: 85;" class = "container">
 		<div class = "panel panel-default">
 			<div class = "panel-body">
+				<a href="book.php" class="btn btn-secondary w-100">Back</a>
 				<strong><h3 style = "color:#000000; font-weight: bold;"><?php echo $fetch['tour_type_name']?></h3></strong>
 				<br />
 				
