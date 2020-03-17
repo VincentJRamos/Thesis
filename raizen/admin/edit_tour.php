@@ -88,9 +88,9 @@
 						<div class = "form-group">
 							<label>Photo </label>
 							<div id = "preview" style = "width:150px; height :150px; border:1px solid #000;">
-								<img src = "../photo/<?php echo $fetch['photo']?>" id = "lbl" width = "100%" height = "100%"/>
+								<img src = "../photo/<?php echo $fetch['photo']; ?>" id = "lbl" width = "100%" height = "100%"/>
 							</div>
-							<input type = "file" required = "required" id = "photo" name = "photo" />
+							<input type = "file" id = "photo" name = "photo" value="../photo/<?php echo $fetch['photo']; ?>" />
 						</div>
 						<br />
 						<div class = "form-group">

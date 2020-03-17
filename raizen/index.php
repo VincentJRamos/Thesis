@@ -11,7 +11,7 @@ $city = $content->get_content('city');
 $workhours = $content->get_content('workhours');
 $contact = $content->get_content('contact');
 $email = $content->get_content('email');
-$photo = $content->get_photo('photo');
+//$photo = $content->get_photo('photo');
 
 $gallery_list = $content->get_photo_list();
 
