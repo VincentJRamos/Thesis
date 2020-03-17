@@ -73,7 +73,7 @@
 								$mysql_query .= " WHERE `status` = '$status'";
 							}
 
-							$query = $conn->query($mysql_query) or die(mysqli_error());
+							$query = $conn->query($mysql_query) or die(mysqli_error($conn));
 							while($fetch = $query->fetch_array()){
 								$pending = $fetch['bill'] - $fetch['payment'];
 						?>

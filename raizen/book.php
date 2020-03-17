@@ -28,7 +28,7 @@
 	<div style = "margin-left:80px;" class = "container">
 		<div class = "panel panel-default">
 			<div class = "panel-body">
-				<strong><h3 style = "color:#000000;">BOOK YOUR TOUR</h3></strong>
+				<strong><h2 style = "color:#000000; font-weight: bold;">Choose your Tour</h2></strong>
 				<?php
 					require_once 'admin/connect.php';
 					$query = $conn->query("SELECT * FROM `tour` INNER JOIN tour_type ON tour.tour_type = tour_type.id ORDER BY `price` ASC") or die(mysql_error());
@@ -39,8 +39,8 @@
 							<img src = "photo/<?php echo $fetch['photo']?>" height = "250" width = "350"/>
 						</div>
 						<div style = "float:left; margin-left:10px;">
-							<h3 style = "color:#000000;"><?php echo $fetch['tour_type_name']?></h3>
-							<h4 style = "color:#00ff00;"><?php echo "Price: Php. ".$fetch['price'].".00"?></h4>
+							<h3 style = "color:#000000; font-weight: bold;"><?php echo $fetch['tour_type_name']?></h3>
+							<h4 style="color:#000000;">Price: <span style="color:#cc9966; font-weight: bold;"><?php echo "Php. ".$fetch['price'].".00"?></span></h4>
 							<br /><br /><br /><br /><br /><br />
 							<button style = "margin-left:450px;" type="button" class="btn btn-info get_other_details" data-toggle="modal" data-target="#get_tour_details_modal" data-id="<?php echo $fetch['tour_id']?>">View details</button>
 							<a href = "add_reserve.php?tour_id=<?php echo $fetch['tour_id']?>" class = "btn btn-info"><i class = "glyphicon glyphicon-list"></i>Book Now!</a>
@@ -56,27 +56,27 @@
     <div class="modal fade" id="get_tour_details_modal" tabindex="-1" role="dialog" aria-labelledby="get_tour_details_modal_label" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
-	      <div class="modal-header bg-primary">
-	        <h5 class="modal-title text-light"><span id="display_tour_type"></span></h5>
-	        <h5 class="text-light"><span id="display_price" class="text-light"></span></h5>
-	        <h5 class="text-light"><span id="display_no_of_days" class="text-light"></span></h5>
+	      <div class="modal-header" style="background: #cc9966;">
+	        <h3 class="modal-title" style="font-weight: bold;"><span id="display_tour_type"></span></h3>
+	        <h4 style="font-weight: bold;"><span id="display_price"></span></h4>
+	        <h4 style="font-weight: bold;"><span id="display_no_of_days"></span></h4>
 	      </div>
 	      <div class="modal-body">
 	      	
 	      	<div class="content">
-	      		<label for="display_package_inclusions" class="text-primary">Package inclusions:</label>
+	      		<label for="display_package_inclusions" style="color: #cc9966;">Package inclusions:</label>
 	      		<textarea id="display_package_inclusions" cols="15" rows="15" class="form-control" disabled></textarea>
 
-	      		<label for="display_sites_to_visit" class="text-primary">Sites to visit:</label>
+	      		<label for="display_sites_to_visit" style="color: #cc9966;">Sites to visit:</label>
 	      		<textarea id="display_sites_to_visit" cols="15" rows="15" class="form-control" disabled></textarea>
 
-	      		<label for="display_remarks" class="text-primary">Others:</label>
+	      		<label for="display_remarks" style="color: #cc9966;">Others:</label>
 	      		<textarea id="display_remarks" cols="15" rows="15" class="form-control" disabled></textarea>
 	      	</div>
 
 	      </div>
-	      <div class="modal-footer bg-primary">
-	        <button type="button" class="btn btn-danger" id="testqwe" data-dismiss="modal">Close</button>
+	      <div class="modal-footer" style="background: #cc9966;">
+	        <button type="button" class="btn btn-light" id="testqwe" data-dismiss="modal">Close</button>
 	      </div>
 	    </div>
 	  </div>

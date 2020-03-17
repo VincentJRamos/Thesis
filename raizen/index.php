@@ -303,8 +303,8 @@ $gallery_list = $content->get_photo_list();
 						</div>								
 						<div class="row wow fadeInRight" data-wow-duration="1s" data-wow-delay="800ms">
 							<!-- Start contact-form -->	
-							<form id="contact-form" method="post" action="#">
-								<div class="col-lg-6 col-sm-6">				
+							<form id="contact-form" method="post" action="contact/add_contact.php">
+								<div class="col-lg-12 col-sm-12">				
 									<div class="form-group">
 										<input type="text" name="name" class="form-control" placeholder="Your name">
 									</div>
@@ -314,13 +314,10 @@ $gallery_list = $content->get_photo_list();
 									<div class="form-group">
 										<input type="text" name="subject" class="form-control" placeholder="Subject">
 									</div>
-								</div>
-								<div class="col-lg-6 col-sm-6">				
 									<div class="form-group">
-										<textarea  name="message" class="form-control" placeholder="Your message" rows="8"></textarea>
+										<textarea  id="message" class="form-control" placeholder="Your message" rows="8"></textarea>
 									</div>
-									<div id="output"></div>
-									<input type="submit" class="" value="Submit">
+									<input type="submit" name="submit_contactsupport" value="Submit">
 								</div>
 							</form>
 							<!-- End contact-form -->
@@ -350,6 +347,22 @@ $gallery_list = $content->get_photo_list();
     
     <a href="#" class="scroll-up"><i class="fa fa-arrow-up"></i></a>
 
+    <div class="modal fade" id="contactModal" role="dialog" aria-labelledby="contactModal" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title text-primary">Success</h5>
+	      </div>
+	      <div class="modal-body">
+	          <h2 style="color:#0000b3; font-weight: bold;">Thank you for letting us know your concern, Kindly wait for our response to the email you have specified.</h2>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/retina.min.js"></script>
@@ -362,6 +375,68 @@ $gallery_list = $content->get_photo_list();
 	<script src="js/jquery.knob.min.js"></script>	
 	<script src="js/jquery.validate.min.js"></script>
 	<script src="js/custom.js"></script>	
+
+	<script>
+		$(document).ready(function(){
+			$('#contact-form').submit(function(e){
+				e.preventDefault();
+
+				form = $(this);
+
+				let name = $("input[name='name']").val();
+				let email = $("input[name='email']").val();
+				let subject = $("input[name='subject']").val();
+				let message = $("#message").val();
+
+				let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+				if (!name) {
+					alert('Name is required!');
+					return;
+				}
+
+				else if (!email) {
+					alert('Email is required!');
+					return;
+				}
+
+				else if (!email.match(mailformat)) {
+					alert('Please enter a valid email!');
+					return;
+				}
+
+				else if (!subject) {
+					alert('Subject is required!');
+					return;
+				}
+
+				else if (!message) {
+					alert('Message is required!');
+					return;
+				}
+
+				$.ajax({
+					url: form.attr('action'),
+					type: form.attr('method'),
+					data: {
+						'name': name,
+						'email': email,
+						'subject': subject,
+						'message': message,
+					},
+					success:function(data){
+						if (data === 'True') {
+							$('#contactModal').modal('show');
+							$("input[name='name']").val('');
+							$("input[name='email']").val('');
+							$("input[name='subject']").val('');
+							$("#message").val('');
+						}
+					}
+				});
+			});
+		});
+	</script>
 
     </body>
 </html>

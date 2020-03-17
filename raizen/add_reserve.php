@@ -23,27 +23,31 @@
 	</head>
 <body>
 <?php include ("header.php"); ?>
+	<?php 
+		require_once 'admin/connect.php';
+		$query = $conn->query("SELECT * FROM `tour` INNER JOIN `tour_type` ON tour.tour_type = tour_type.id WHERE `tour_id` = '$_REQUEST[tour_id]'") or die(mysql_error());
+		$fetch = $query->fetch_array();
+	?>
 	<div style = "margin-left: 85;" class = "container">
 		<div class = "panel panel-default">
 			<div class = "panel-body">
-				<strong><h3 style = "color:#000000;">BOOK YOUR TOUR</h3></strong>
+				<strong><h3 style = "color:#000000; font-weight: bold;"><?php echo $fetch['tour_type_name']?></h3></strong>
 				<br />
-				<?php 
-					require_once 'admin/connect.php';
-					$query = $conn->query("SELECT * FROM `tour` INNER JOIN `tour_type` ON tour.tour_type = tour_type.id WHERE `tour_id` = '$_REQUEST[tour_id]'") or die(mysql_error());
-					$fetch = $query->fetch_array();
-				?>
-				<div style = "height:300px; width:800px;">
+				
+				<div style = "height:300px; width:1080px;">
 					<div style = "float:left;">
-						<img src = "photo/<?php echo $fetch['photo']?>" height = "300px" width = "400px">
+						<img src = "photo/<?php echo $fetch['photo']?>" height = "300px" width = "550px">
 					</div>
-					<div style = "float:left; margin-left:10px;">
-						<h3 style = "color:#000000;"><?php echo $fetch['tour_type_name']?></h3>
-						<h3 style = "color:#00ff00;"><?php echo "Php. ".$fetch['price'].".00";?></h3>
+					<div style = "margin-left:25px;">
+						<h4 style="color:#000000">Price: <span style = "color:#cc9966; font-weight: bold"><?php echo "Php. ".$fetch['price'].".00";?></span></h4>
+						<h4 style="color:#000000; margin-top:25px">Days: <span style = "color:#cc9966; font-weight: bold"><?php echo $fetch['no_of_days']." Day/s";?></span></h4>
+						<h4 style="color:#000000; margin-top:25px">Packages Inclusions: <span style = "color:#cc9966; font-weight: bold"><?php echo $fetch['package_inclusions'];?></span></h4>
+						<h4 style="color:#000000; margin-top:25px">Sites to visit: <span style = "color:#cc9966; font-weight: bold"><?php echo $fetch['sites_to_visit'];?></span></h4>
+						<h4 style="color:#000000; margin-top:25px">Others: <span style = "color:#cc9966; font-weight: bold"><?php echo $fetch['remarks'];?></span></h4>
 					</div>
 				</div>
 				<br style = "clear:both;" />
-				<div class = "well col-md-4" style = "color:#000000;">
+				<div class = "well col-md-6" style = "color:#000000;">
 					<form method = "POST" enctype = "multipart/form-data" autocomplete="off">
 						<div class = "form-group">
 							<label>Book Date</label>
