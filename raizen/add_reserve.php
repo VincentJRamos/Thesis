@@ -35,20 +35,39 @@
 				<strong><h3 style = "color:#000000; font-weight: bold;"><?php echo $fetch['tour_type_name']?></h3></strong>
 				<br />
 				
-				<div style = "height:300px; width:1080px;">
-					<div style = "float:left;">
-						<img src = "photo/<?php echo $fetch['photo']?>" height = "300px" width = "550px">
+				<div class = "col-md-6">
+				<!-- <div style = "height:300px; width:1080px;"> -->
+					<!-- <div style = "float:left;"> -->
+					<div class = "well col-md-12">
+						<img src = "photo/<?php echo $fetch['photo']?>" height = "350px" width = "480px">
 					</div>
-					<div style = "margin-left:25px;">
-						<h4 style="color:#000000">Price: <span style = "color:#cc9966; font-weight: bold"><?php echo "Php. ".$fetch['price'].".00";?></span></h4>
-						<h4 style="color:#000000; margin-top:25px">Days: <span style = "color:#cc9966; font-weight: bold"><?php echo $fetch['no_of_days']." Day/s";?></span></h4>
-						<h4 style="color:#000000; margin-top:25px">Packages Inclusions: <span style = "color:#cc9966; font-weight: bold"><?php echo $fetch['package_inclusions'];?></span></h4>
-						<h4 style="color:#000000; margin-top:25px">Sites to visit: <span style = "color:#cc9966; font-weight: bold"><?php echo $fetch['sites_to_visit'];?></span></h4>
-						<h4 style="color:#000000; margin-top:25px">Others: <span style = "color:#cc9966; font-weight: bold"><?php echo $fetch['remarks'];?></span></h4>
+					
+					<div class = "well col-md-12" style = "color:#000000;">
+						<form method = "POST" enctype = "multipart/form-data" autocomplete="off">
+							<div class = "form-group">
+								<label>Book Date</label>
+								<input type = "text" class = "form-control datepicker" name = "date" required = "required" /><br/>
+								<label for="no_of_participants">No. of participants</label>
+								<input type = "number" class = "form-control" name = "no_of_participants" required = "required" />
+							</div>
+							<br />
+							<div class = "form-group">
+								<button class = "btn btn-info form-control" name = "add_guest"><i class = "glyphicon glyphicon-save"></i>Submit</button>
+							</div>
+						</form>
 					</div>
+					
 				</div>
-				<br style = "clear:both;" />
-				<div class = "well col-md-6" style = "color:#000000;">
+
+				<div class = "col-md-6">
+					<h4 style="color:#000000;">Price: <span style = "color:#cc9966; font-weight: bold"><?php echo "Php. ".$fetch['price'].".00";?></span></h4>
+					<h4 style="color:#000000; margin-top:25px">Days: <span style = "color:#cc9966; font-weight: bold"><?php echo $fetch['no_of_days']." Day/s";?></span></h4>
+					<h4 style="color:#000000; margin-top:25px">Packages Inclusions: <span style = "color:#cc9966; font-weight: bold"><?php echo $fetch['package_inclusions'];?></span></h4>
+					<h4 style="color:#000000; margin-top:25px">Sites to visit: <span style = "color:#cc9966; font-weight: bold"><?php echo $fetch['sites_to_visit'];?></span></h4>
+					<h4 style="color:#000000; margin-top:25px">Others: <span style = "color:#cc9966; font-weight: bold"><?php echo $fetch['remarks'];?></span></h4>
+				</div>
+				<!-- <br style = "clear:both;" /> -->
+<!-- 				<div class = "well col-md-5" style = "color:#000000; margin-left:50px;">
 					<form method = "POST" enctype = "multipart/form-data" autocomplete="off">
 						<div class = "form-group">
 							<label>Book Date</label>
@@ -61,8 +80,7 @@
 							<button class = "btn btn-info form-control" name = "add_guest"><i class = "glyphicon glyphicon-save"></i>Submit</button>
 						</div>
 					</form>
-				</div>
-				<div class = "col-md-4"></div>
+				</div> -->
 				<?php require_once 'add_query_reserve.php'?>
 			</div>
 		</div>
